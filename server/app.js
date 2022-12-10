@@ -3,16 +3,17 @@ const app = express();
 const mysql = require("mysql");
 const cors = require("cors");
 const dotenv = require("dotenv");
+dotenv.config();
 
 app.use(cors());
 app.use(express.json());
 
 const db = mysql.createConnection({
-  user: process.env.USERNAME,
+  user: "sqluser",
   host: "localhost",
   password: process.env.PASSWORD,
   database: "restaurant_supply_express",
-}).then((res) => console.log(res));
+});
 
 
 app.post("/add_owner", (req, res) => {
@@ -105,6 +106,9 @@ app.get("/pilot", (req, res) => {
       res.json({ message: "Get Error" })
       //res.send("Error detected")
     }  
+    console.log(result);
+    res.json(result);
+    
   });
 });
 
