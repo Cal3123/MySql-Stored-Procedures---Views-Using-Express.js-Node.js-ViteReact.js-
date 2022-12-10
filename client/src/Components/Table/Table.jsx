@@ -6,7 +6,8 @@ function Table({
   width = "auto",
   height = "auto",
 }) {
-
+  const row = list.length > 0 ? Object.keys(list[0]) : {};
+  console.log(list)
   return (
     <div style={{ width, boxShadow: "px 6px 3px #ccc" }}>
       {list.length > 0 && (
@@ -16,8 +17,10 @@ function Table({
         >
           <thead style={{ backgroundColor: "black", color: "white" }}>
             <tr>
-              {colNames.map((headerItem, index) => (
-                <th style={{  width: "100%", height: "100%", padding: "5px 10px" }} key={index}>{headerItem.toUpperCase()} </th>
+              
+              { row.length > 0 &&
+              row.map((headerItem, index) => (
+                <th style={{  width: "auto", height: "auto", padding: "5px 10px" }} key={index}> COLUMN {index} </th>
               ))}
             </tr>
           </thead>
@@ -25,7 +28,7 @@ function Table({
             {Object.values(list).map((obj, index) => (
               <tr style={{  width: "100%", height: "100%", padding: "5px 10px" }} key={index}>
                 {Object.values(obj).map((value, index2) => (
-                  <td key={index2}>{value}</td>
+                  <td key={index2}>{value? value : "null"}</td>
                 ))}
               </tr>
             ))}

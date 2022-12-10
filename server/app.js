@@ -43,6 +43,8 @@ app.get("/add_owner", (req, res) => {
       res.json({ message: "Get Error" })
       //res.send("Error detected")
     }  
+    console.log(result);
+    res.json(result);
   });
 });
 
@@ -77,6 +79,8 @@ app.get("/add_employee", (req, res) => {
       res.json({ message: "Get Error" })
       //res.send("Error detected")
     }  
+    console.log(result);
+    res.json(result); 
   });
 });
 
@@ -108,7 +112,6 @@ app.get("/pilot", (req, res) => {
     }  
     console.log(result);
     res.json(result);
-    
   });
 });
 
@@ -135,6 +138,8 @@ app.get("/add_worker_role", (req, res) => {
       res.json({ message: "Get Error" })
       //res.send("Error detected")
     }  
+    console.log(result);
+    res.json(result);
   });
 });
 
@@ -163,6 +168,8 @@ app.get("/add_ingredient", (req, res) => {
       res.json({ message: "Get Error" })
       //res.send("Error detected")
     }  
+    console.log(result);
+    res.json(result);
   });
 });
 
@@ -194,6 +201,8 @@ app.get("/add_drone", (req, res) => {
       res.json({ message: "Get Error" })
       //res.send("Error detected")
     }  
+    console.log(result);
+    res.json(result);
   });
 });
 
@@ -223,6 +232,8 @@ app.get("/add_restaurant", (req, res) => {
       res.json({ message: "Get Error" })
       //res.send("Error detected")
     }  
+    console.log(result);
+    res.json(result);
   });
 });
 
@@ -252,6 +263,8 @@ app.get("/add_service", (req, res) => {
       res.json({ message: "Get Error" })
       //res.send("Error detected")
     }  
+    console.log(result);
+    res.json(result);  
   });
 });
 
@@ -281,6 +294,8 @@ app.get("/add_location", (req, res) => {
       res.json({ message: "Get Error" })
       //res.send("Error detected")
     }  
+    console.log(result);
+    res.json(result);
   });
 });
 
@@ -308,6 +323,8 @@ app.get("/start_funding", (req, res) => {
       res.json({ message: "Get Error" })
       //res.send("Error detected")
     }  
+    console.log(result);
+    res.json(result);  
   });
 });
 
@@ -335,6 +352,8 @@ app.get("/start_funding", (req, res) => {
       res.json({ message: "Get Error" })
       //res.send("Error detected")
     }  
+    console.log(result);
+    res.json(result);
   });
 });
 
@@ -362,6 +381,8 @@ app.get("/hire_employee", (req, res) => {
       res.json({ message: "Get Error" })
       //res.send("Error detected")
     }  
+    console.log(result);
+    res.json(result); 
   });
 });
 
@@ -389,6 +410,8 @@ app.get("/fire_employee", (req, res) => {
       res.json({ message: "Get Error" })
       //res.send("Error detected")
     }  
+    console.log(result);
+    res.json(result);
   });
 });
 
@@ -416,6 +439,8 @@ app.get("/manage_service", (req, res) => {
       res.json({ message: "Get Error" })
       //res.send("Error detected")
     }  
+    console.log(result);
+    res.json(result); 
   });
 });
  
@@ -444,6 +469,8 @@ app.get("/takeover_drone", (req, res) => {
       res.json({ message: "Get Error" })
       //res.send("Error detected")
     }  
+    console.log(result);
+    res.json(result);
   });
 });
 
@@ -472,6 +499,8 @@ app.get("/join_swarm", (req, res) => {
       res.json({ message: "Get Error" })
       //res.send("Error detected")
     }  
+    console.log(result);
+    res.json(result);
   });
 });
 
@@ -499,6 +528,8 @@ app.get("/leave_swarm", (req, res) => {
       res.json({ message: "Get Error" })
       //res.send("Error detected")
     }  
+    console.log(result);
+    res.json(result);
   });
 });
 
@@ -529,6 +560,8 @@ app.get("/load_drone", (req, res) => {
       res.json({ message: "Get Error" })
       //res.send("Error detected")
     }  
+    console.log(result);
+    res.json(result);
   });
 });
 
@@ -557,6 +590,8 @@ app.get("/refuel_drone", (req, res) => {
       res.json({ message: "Get Error" })
       //res.send("Error detected")
     }  
+    console.log(result);
+    res.json(result); 
   });
 });
 
@@ -585,6 +620,8 @@ app.get("/fly_drone", (req, res) => {
       res.json({ message: "Get Error" })
       //res.send("Error detected")
     }  
+    console.log(result);
+    res.json(result); 
   });
 });
 
@@ -615,6 +652,8 @@ app.get("/purchase_ingredient", (req, res) => {
       res.json({ message: "Get Error" })
       //res.send("Error detected")
     }  
+    console.log(result);
+    res.json(result);
   });
 });
 
@@ -641,6 +680,8 @@ app.get("/remove_ingredient", (req, res) => {
       res.json({ message: "Get Error" })
       //res.send("Error detected")
     }  
+    console.log(result);
+    res.json(result);
   });
 });
 
@@ -668,6 +709,8 @@ app.get("/remove_drone", (req, res) => {
       res.json({ message: "Get Error" })
       //res.send("Error detected")
     }  
+    console.log(result);
+    res.json(result);
   });
 });
 
@@ -694,6 +737,8 @@ app.get("/remove_pilot_role", (req, res) => {
       res.json({ message: "Get Error" })
       //res.send("Error detected")
     }  
+    console.log(result);
+    res.json(result);
   });
 });
 
@@ -707,6 +752,8 @@ app.get("/display_owner_view", (req, res) => {
       res.json({ message: "Get Error" })
       //res.send("Error detected")
     }  
+    console.log(result);
+    res.json(result); 
   });
 });
 
@@ -727,6 +774,8 @@ app.get("/display_pilot_view", (req, res) => {
       res.json({ message: "Get Error" })
       //res.send("Error detected")
     }  
+    console.log(result);
+    res.json(result);
   });
 });
 
@@ -737,6 +786,8 @@ app.get("/display_location_view", (req, res) => {
       res.json({ message: "Get Error" })
       //res.send("Error detected")
     }  
+    console.log(result);
+    res.json(result);
   });
 });
 
@@ -747,6 +798,8 @@ app.get("/display_ingredient_view", (req, res) => {
       res.json({ message: "Get Error" })
       //res.send("Error detected")
     }  
+    console.log(result);
+    res.json(result); 
   });
 });
 
@@ -757,6 +810,8 @@ app.get("/display_service_view", (req, res) => {
       res.json({ message: "Get Error" })
       //res.send("Error detected")
     }  
+    console.log(result);
+    res.json(result);
   });
 });
 
@@ -764,3 +819,4 @@ app.get("/display_service_view", (req, res) => {
 app.listen(3001, () => {
   console.log("Yey, your server is running on port 3001");
 });
+

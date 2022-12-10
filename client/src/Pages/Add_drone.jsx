@@ -4,20 +4,29 @@ import Axios from "axios";
 import Table from "../Components/Table/Table"
 
 function Add_drone() {
-    const [ip_username, setUserName] = useState("");
-    const [ip_licenseID, setLicenseID] = useState("");
-    const [ip_pilot_experience, setPilotExperience] = useState(0);
-    const [pilots, setPilots] = useState([]);
+    const [ip_id, setIpId] = useState("");
+    const [ip_tag, setIpTag] = useState(0);
+    const [ip_fuel, setIpFuel] = useState(0);
+    const [ip_capacity, setIpCapacity] = useState(0);
+    const [ip_sales, setIpSales] = useState(0);
+    const [ip_flown_by, setIpFlownBy] = useState("");
+    const [drones, setDrones] = useState([]);
     const [notification, setNotification] = useState("");
+    const colNames = ["ID", "Tag", "Fuel", "Capacity", "Sales", "Flown By"];
+
+
+    
+    const addDrone = () => {
   
-    const addPilot = () => {
-  
-      if(ip_username.length > 0 && ip_licenseID.length > 0 && ip_pilot_experience.length > 0 
-        && ip_pilot_experience !== 0){
-          Axios.post("http://localhost:3001/add_pilot_role", {
-            ip_username: ip_username,
-            ip_licenseID: ip_licenseID,
-            ip_pilot_experience: ip_pilot_experience,
+      if(ip_id.length > 0 && ip_tag !== 0 && ip_capacity !== 0 && ip_sales !== 0
+         && ip_flown_by.length > 0 && ip_fuel !== 0){
+          Axios.post("http://localhost:3001/add_drone", {
+            ip_id : ip_id,
+            ip_tag : ip_tag,
+            ip_fuel : ip_fuel,
+            ip_capacity : ip_capacity,
+            ip_sales : ip_sales,
+            ip_flown_by : ip_flown_by,
           }).then((res) => {
               setNotification(res.data.message)
           });
@@ -27,46 +36,67 @@ function Add_drone() {
   
     };
   
-    const getPilots = () => {
-      Axios.get("http://localhost:3001/pilot").then((response) => {
-        console.log(response)
-        setPilots(response.data);
+    const getDrones = () => {
+      Axios.get("http://localhost:3001/add_drone").then((response) => {
+        setDrones(response.data);
       });
     };
   
-    const colNames = ["Username", "LicenseID", "PilotExperience"];
-  console.log(pilots)
+
+ 
     return (
       <>
         <div className="App">
-          <text >  PHASE IV MVP</text>
-          <h1>{notification}</h1>
+          
           <div className="information">
+          <text >  Add Drone  Procedure</text>
+          <h1>{notification}</h1>
             <label>{colNames[0]}:</label>
             <input
               type="text"
               onChange={(event) => {
-                setUserName(event.target.value);
+                setIpId(event.target.value);
               }}
             />
             <label>{colNames[1]}:</label>
             <input
-              type="text"
+              type="number"
               onChange={(event) => {
-                setLicenseID(event.target.value);
+                setIpTag(event.target.value);
               }}
             />
             <label>{colNames[2]}:</label>
             <input
               type="number"
               onChange={(event) => {
-                setPilotExperience(event.target.value);
+                setIpFuel(event.target.value);
               }}
             />
-            <button onClick={addPilot}>Add Pilot</button>
+            <label>{colNames[3]}:</label>
+            <input
+              type="number"
+              onChange={(event) => {
+                setIpCapacity(event.target.value);
+              }}
+            />
+            <label>{colNames[4]}:</label>
+            <input
+              type="number"
+              onChange={(event) => {
+                setIpSales(event.target.value);
+              }}
+            />
+            <label>{colNames[5]}:</label>
+            <input
+              type="text"
+              onChange={(event) => {
+                setIpFlownBy(event.target.value);
+              }}
+            />
+            <button onClick={addDrone}>Add Drone</button>
           </div>
           <div className="employees">
-            <button onClick={getPilots}>Show Pilot</button>
+            <button onClick={getDrones}>Show Drones</button>
               
   
             {/*pilots.map((val, key) => {
@@ -82,7 +112,7 @@ function Add_drone() {
             })*/}
           </div>
       </div>
-      <Table list={pilots} colNames={colNames}/>
+      <Table list={drones}/>
       </>
     );  
   }

@@ -35,13 +35,13 @@ function Add_pilot_role() {
   };
 
   const colNames = ["Username", "LicenseID", "PilotExperience"];
-console.log(pilots)
+ 
   return (
     <>
       <div className="App">
-        <text >  PHASE IV MVP</text>
-        <h1>{notification}</h1>
         <div className="information">
+        <text >  Pilot  Procedure</text>
+          <h1>{notification}</h1>
           <label>{colNames[0]}:</label>
           <input
             type="text"
@@ -82,7 +82,7 @@ console.log(pilots)
           })*/}
         </div>
     </div>
-    <Table list={pilots} colNames={colNames}/>
+    <Table list={pilots}/>
     </>
   );  
 }
