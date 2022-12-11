@@ -8,6 +8,7 @@ function Add_service() {
     const [ip_long_name, setIpLongname] = useState("");
     const [ip_home_base, setIpHomeBase] = useState("");
     const [ip_manager, setIpManager] = useState("");
+    const [services, setServices] = useState([]);
     const [notification, setNotification] = useState("");
     const colNames = ["Id", "Long Name", "Home Base", "Manager"];
 

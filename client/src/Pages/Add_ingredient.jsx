@@ -8,6 +8,7 @@ function Add_ingredient() {
     const [ip_iname, setIpIname] = useState("");
     const [ip_weight, setIpWeight] = useState(0);
     const [notification, setNotification] = useState("");
+    const [ingredients, setIngredients] = useState([]);
     const colNames = ["Barcode", "Iname", "Weight"];
 
 

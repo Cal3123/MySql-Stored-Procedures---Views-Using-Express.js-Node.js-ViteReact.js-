@@ -8,6 +8,7 @@ function Add_location() {
     const [ip_xcoord, setIpXCoord] = useState(0);
     const [ip_ycoord, setIpYCoord] = useState(0);
     const [ip_space, setIpSpace] = useState(0);
+    const [locations, setLocations] = useState([]);
     const [notification, setNotification] = useState("");
     const colNames = ["Label", "XCoord", "YCoord", "Space"];
 
