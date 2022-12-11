@@ -11,7 +11,7 @@ function Start_funding() {
   const startFunding = () => {
 
     if(ip_owner.length > 0 && ip_long_name.length > 0){
-        Axios.post("http://localhost:3001/add_pilot_role", {
+        Axios.post("http://localhost:3001/start_funding", {
           ip_owner: ip_owner,
           ip_long_name: ip_long_name
         }).then((res) => {

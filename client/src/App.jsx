@@ -9,6 +9,7 @@ import Add_owner from './Pages/Add_owner';
 import Add_restaurant from './Pages/Add_restaurant';
 import Add_service from './Pages/Add_service';
 import Add_worker_role from './Pages/Add_worker_role';
+import Start_funding from './Pages/Start_funding';
 
 const App = () => {
   return (
@@ -25,6 +26,7 @@ const App = () => {
        <Route path='/add_restaurant' element={<Add_restaurant />} />
        <Route path='/add_service' element={<Add_service />} />
        <Route path='/add_worker_role' element={<Add_worker_role />} />
+       <Route path='/start_funding' element={<Start_funding />} />
       </Routes>
 		</BrowserRouter>
   );
