@@ -9,21 +9,22 @@ function Hire_employee() {
     const [ip_id, setId] = useState("");
     const [employees, setEmployees] = useState([]);
     const [notification, setNotification] = useState("");
-    const colNames = ["Owner", "ID"];
+    const colNames = ["Username", "Delivery Service"];
 
 
     
     const hireEmployee = () => {
-  
-      if(ip_owner.length > 0 && ip_id.length > 0 ){
+      if (ip_username.length < 1) {
+        setNotification("Please Choose a Valid User");
+      } else if (ip_id.length < 1) {
+        setNotification("Please Choose a Valid Delivery Service");
+      } else {
           Axios.post("http://localhost:3001/hire_employee", {
             ip_owner : ip_owner,
             ip_id : ip_id,
           }).then((res) => {
               setNotification(res.data.message)
           });
-      } else {
-        setNotification("One of your field(s) is empty");
       }
   
     };

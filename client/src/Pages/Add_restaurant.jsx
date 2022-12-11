@@ -24,6 +24,8 @@ function Add_restaurant() {
         setNotification("Invalid Restaurant Rating");
       } else if (ip_spent < 0) {
         setNotification("Invalid Spending Amount");
+      } else if (ip_location.length < 1) {
+        setNotification("Please Select a Valid Location");
       } else {
           Axios.post("http://localhost:3001/add_restaurant", {
             ip_long_name : ip_long_name,

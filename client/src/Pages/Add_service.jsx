@@ -17,8 +17,15 @@ function Add_service() {
 
     
     const addService = () => {
-  
-      if(ip_id.length > 0 && ip_long_name.length > 0 && ip_home_base.length > 0 && ip_manager.length > 0){
+      if (ip_id.length < 1) {
+        setNotification("Please Enter a Delivery Service ID");
+      } else if (ip_long_name.length < 1) {
+        setNotification("Please Enter a Valid Delivery Service Name");
+      } else if (ip_home_base.length < 1) {
+        setNotification("Please Enter a Valid Home Base");
+      } else if (ip_manager.length < 1) {
+        setNotification("Please Select a Valid Manager");
+      } else {
           Axios.post("http://localhost:3001/add_service", {
             ip_id : ip_id,
             ip_long_name : ip_long_name,
@@ -27,10 +34,7 @@ function Add_service() {
           }).then((res) => {
               setNotification(res.data.message)
           });
-      } else {
-        setNotification("One of your field(s) is empty");
       }
-  
     };
   
     const getServices = () => {
