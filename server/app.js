@@ -5,23 +5,56 @@ const cors = require("cors");
 const dotenv = require("dotenv");
 dotenv.config();
 
-app.use(cors());
+// app.use(cors());
 app.use(express.json());
 
 const db = mysql.createConnection({
-  user: "sqluser",
-  host: "localhost",
-  password: process.env.PASSWORD,
-  database: "restaurant_supply_express",
+  user: process.env.DATABASE_USER,
+  host: process.env.DATABASE_HOST,
+  password: process.env.DATABASE_PASSWORD,
+  database: process.env.DATABASE_NAME
 });
 
+/** START GET FOR INPUTS */
+app.get("/getUsernames", (req, res) => {
+  db.query("SELECT username, concat(first_name, ' ', last_name, ' (', username, ')') as name FROM users", (err, result) => {
+    if (err) {
+      res.header('Access-Control-Allow-Origin', '*');
+      res.json({ message: "Get Error" });
+    }  
+
+    const usernames = [];
+    for (let i = 0; i < result.length; i++) {
+      usernames.push({'username': result[i]["username"], 'name': result[i]["name"]});
+    }
+    res.header('Access-Control-Allow-Origin', '*');
+    res.json(usernames);
+  });
+});
+
+app.get("/getRestaurants", (req, res) => {
+  db.query("SELECT long_name FROM restaurants", (err, result) => {
+    if (err) {
+      res.header('Access-Control-Allow-Origin', '*');
+      res.json({ message: "Get Error" });
+    }  
+
+    const restaurants = [];
+    for (let i = 0; i < result.length; i++) {
+      restaurants.push(result[i]["long_name"]);
+    }
+    res.header('Access-Control-Allow-Origin', '*');
+    res.json(restaurants);
+  });
+});
+/** END GET FOR INPUTS */
 
 app.post("/add_owner", (req, res) => {
   const ip_username = req.body.ip_username;
   const ip_first_name = req.body.ip_first_name;
   const ip_last_name = req.body.ip_last_name;
   const ip_address = req.body.ip_address;
-  const ip_birthdate = req.body.ip_birthdate;
+  const ip_birthdate = req.body.ip_birthdate; /** @TODO ERROR. NEEDS NORMALIZATION */
    
   db.query(`call add_owner(?,?,?,?,?)`,
     [ip_username, ip_first_name, ip_last_name, ip_address, ip_birthdate],
@@ -53,11 +86,11 @@ app.post("/add_employee", (req, res) => {
   const ip_first_name = req.body.ip_first_name;
   const ip_last_name = req.body.ip_last_name;
   const ip_address = req.body.ip_address;
-  const ip_birthdate = req.body.ip_birthdate;
+  const ip_birthdate = req.body.ip_birthdate; /** @TODO FIX */
   const ip_taxID = req.body.ip_taxID;
   const ip_hired = req.body.ip_hired;
-  const ip_employee_experience = req.body.ip_employee_experience;
-  const ip_salary = req.body.ip_salary;
+  const ip_employee_experience = parseInt(req.body.ip_employee_experience);
+  const ip_salary = parseInt(req.body.ip_salary);
    
   db.query(`call add_employee(?,?,?,?,?)`,
     [ip_username, ip_first_name, ip_last_name, ip_address, ip_birthdate, ip_taxID, ip_hired, ip_employee_experience, ip_salary],
@@ -87,7 +120,7 @@ app.get("/add_employee", (req, res) => {
 app.post("/add_pilot_role", (req, res) => {
   const ip_username = req.body.ip_username;
   const ip_licenseID = req.body.ip_licenseID;
-  const ip_pilot_experience = req.body.ip_pilot_experience;
+  const ip_pilot_experience = parseInt(req.body.ip_pilot_experience);
    
   db.query(`call add_pilot_role(?,?,?)`,
     [ip_username, ip_licenseID, ip_pilot_experience],
@@ -111,6 +144,7 @@ app.get("/pilot", (req, res) => {
       //res.send("Error detected")
     }  
     console.log(result);
+    res.header('Access-Control-Allow-Origin', '*');
     res.json(result);
   });
 });
@@ -146,7 +180,7 @@ app.get("/add_worker_role", (req, res) => {
 app.post("/add_ingredient", (req, res) => {
   const ip_barcode = req.body.ip_barcode;
   const ip_iname = req.body.ip_iname;
-  const ip_weight = req.body.ip_weight;
+  const ip_weight = parseInt(req.body.ip_weight);
 
   db.query(`call add_ingredient(?,?,?)`, [ip_barcode, ip_iname, ip_weight],
     (err, result) => {
@@ -176,9 +210,9 @@ app.get("/add_ingredient", (req, res) => {
 app.post("/add_drone", (req, res) => {
   const ip_id = req.body.ip_id;
   const ip_tag = req.body.ip_tag;
-  const ip_fuel = req.body.ip_fuel;
-  const ip_capacity = req.body.ip_capacity;
-  const ip_sales = req.body.ip_sales;
+  const ip_fuel = parseInt(req.body.ip_fuel);
+  const ip_capacity = parseInt(req.body.ip_capacity);
+  const ip_sales = parseInt(req.body.ip_sales);
   const ip_flown_by = req.body.ip_flown_by;
 
   db.query(`call add_drone(?,?,?,?,?,?)`, [ip_id, ip_tag, ip_fuel, ip_capacity, ip_sales, ip_flown_by],
@@ -208,8 +242,8 @@ app.get("/add_drone", (req, res) => {
 
 app.post("/add_restaurant", (req, res) => {
   const ip_long_name = req.body.ip_long_name;
-  const ip_rating = req.body.ip_rating;
-  const ip_spent = req.body.ip_spent;
+  const ip_rating = parseInt(req.body.ip_rating);
+  const ip_spent = parseInt(req.body.ip_spent);
   const ip_location = req.body.ip_location;
 
   db.query(`call add_restaurant(?,?,?,?)`, [ip_long_name, ip_rating, ip_spent, ip_location ],
@@ -270,9 +304,9 @@ app.get("/add_service", (req, res) => {
 
 app.post("/add_location", (req, res) => {
   const ip_label = req.body.ip_label;
-  const ip_x_coord = req.body.ip_x_coord;
-  const ip_y_coord = req.body.ip_y_coord;
-  const ip_space = req.body.ip_space;
+  const ip_x_coord = parseInt(req.body.ip_x_coord);
+  const ip_y_coord = parseInt(req.body.ip_y_coord);
+  const ip_space = parseInt(req.body.ip_space);
 
   db.query(`call add_location(?,?,?,?)`, [ip_label, ip_x_coord, ip_y_coord, ip_space],
     (err, result) => {
@@ -447,7 +481,7 @@ app.get("/manage_service", (req, res) => {
 app.post("/takeover_drone", (req, res) => {
   const ip_username = req.body.ip_username;
   const ip_id = req.body.ip_id;
-  const ip_tag = req.body.ip_tag;
+  const ip_tag = parseInt(req.body.ip_tag);
 
   db.query(`call takeover_drone(?,?)`, [ip_username, ip_id, ip_tag],
     (err, result) => {
@@ -476,8 +510,8 @@ app.get("/takeover_drone", (req, res) => {
 
 app.post("/join_swarm", (req, res) => {
   const ip_id = req.body.ip_id;
-  const ip_tag = req.body.ip_tag;
-  const ip_swarm_leader_tag = req.body.ip_swarm_leader_tag;
+  const ip_tag = parseInt(req.body.ip_tag);
+  const ip_swarm_leader_tag = parseInt(req.body.ip_swarm_leader_tag);
 
   db.query(`call join_swarm(?,?,?)`, [ip_id, ip_tag, ip_swarm_leader_tag],
     (err, result) => {
@@ -506,7 +540,7 @@ app.get("/join_swarm", (req, res) => {
 
 app.post("/leave_swarm", (req, res) => {
   const ip_id = req.body.ip_id;
-  const ip_tag = req.body.ip_tag;
+  const ip_tag = parseInt(req.body.ip_tag);
 
   db.query(`call leave_swarm(?,?)`, [ip_id, ip_tag],
     (err, result) => {
@@ -535,10 +569,10 @@ app.get("/leave_swarm", (req, res) => {
 
 app.post("/load_drone", (req, res) => {
   const ip_id = req.body.ip_id;
-  const ip_tag = req.body.ip_tag;
+  const ip_tag = parseInt(req.body.ip_tag);
   const ip_barcode = req.body.ip_barcode;
-  const ip_more_packages = req.body.ip_more_packages;
-  const ip_price = req.body.ip_price;
+  const ip_more_packages = parseInt(req.body.ip_more_packages);
+  const ip_price = parseInt(req.body.ip_price);
 
   db.query(`call load_drone(?,?,?,?)`, [ip_id, ip_tag, ip_barcode, ip_more_packages, ip_price],
     (err, result) => {
@@ -567,8 +601,8 @@ app.get("/load_drone", (req, res) => {
 
 app.post("/refuel_drone", (req, res) => {
   const ip_id = req.body.ip_id;
-  const ip_tag = req.body.ip_tag;
-  const ip_more_fuel = req.body.ip_more_fuel;
+  const ip_tag = parseInt(req.body.ip_tag);
+  const ip_more_fuel = parseInt(req.body.ip_more_fuel);
 
   db.query(`call refuel_drone(?,?,?,?)`, [ip_id, ip_tag, ip_more_fuel],
     (err, result) => {
@@ -597,7 +631,7 @@ app.get("/refuel_drone", (req, res) => {
 
 app.post("/fly_drone", (req, res) => {
   const ip_id = req.body.ip_id;
-  const ip_tag = req.body.ip_tag;
+  const ip_tag = parseInt(req.body.ip_tag);
   const ip_destination  = req.body.ip_destination;
 
   db.query(`call fly_drone(?,?,?,?)`, [ip_id, ip_tag, ip_destination],
@@ -628,9 +662,9 @@ app.get("/fly_drone", (req, res) => {
 app.post("/purchase_ingredient", (req, res) => {
   const ip_long_name = req.body.ip_long_name;
   const ip_id = req.body.ip_id;
-  const ip_tag  = req.body.ip_tag;
+  const ip_tag  = parseInt(req.body.ip_tag);
   const ip_barcode = req.body.ip_barcode;
-  const ip_quantity  = req.body.ip_quantity;
+  const ip_quantity  = parseInt(req.body.ip_quantity);
 
   db.query(`call purchase_ingredient(?,?,?,?)`, [ip_long_name, ip_id, ip_tag, ip_barcode, ip_quantity],
     (err, result) => {
@@ -687,7 +721,7 @@ app.get("/remove_ingredient", (req, res) => {
 
 app.post("/remove_drone", (req, res) => {
   const ip_id = req.body.ip_id;
-  const ip_tag = req.body.ip_tag;  
+  const ip_tag = parseInt(req.body.ip_tag);  
 
   db.query(`call remove_drone(?)`, [ip_id, ip_tag],
     (err, result) => {
