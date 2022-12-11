@@ -7,7 +7,7 @@ function Table({
   height = "auto",
 }) {
   const row = list.length > 0 ? Object.keys(list[0]) : {};
-  console.log(list)
+  //console.log(list)
   return (
     <div style={{ width, boxShadow: "px 6px 3px #ccc" }}>
       {list.length > 0 && (

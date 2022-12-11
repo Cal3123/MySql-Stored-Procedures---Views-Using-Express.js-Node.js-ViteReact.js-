@@ -39,7 +39,11 @@ function Add_drone() {
   
     const getDrones = () => {
       Axios.get("http://localhost:3001/add_drone").then((response) => {
-        setDrones(response.data);
+        if(response.message === "Get Error") {
+          setNotification("Get Error")
+        } else {
+          setDrones(response.data);
+        }
       });
     };
   
