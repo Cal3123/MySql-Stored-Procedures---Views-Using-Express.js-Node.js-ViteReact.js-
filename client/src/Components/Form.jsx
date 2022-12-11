@@ -62,7 +62,7 @@ export function DeliveryService(props) {
     const serviceOptions = [];
     serviceOptions.push(<option key="blank" value=""></option>);
     for (let i = 0; i < services.length; i++) {
-        serviceOptions.push(<option key={services[i]['id']} value={services[i]['id']}>{services[i]['long_name']}</option>);
+        serviceOptions.push(<option key={services[i]['id']} value={services[i]['id']}>{services[i]['long_name']} ({services[i]['id']})</option>);
     }
 
     return <div><select name={props.name} onChange={props.onChange}>{serviceOptions}</select></div>;
@@ -89,4 +89,46 @@ export function Drone(props) {
     }
 
     return <div><select name={props.name} onChange={props.onChange}>{droneOptions}</select></div>;
+}
+
+export function Ingredient(props) {
+    const [ingredients, setIngredients] = useState([]);
+    const getIngredients = () => {
+        Axios.get("http://localhost:3001/getIngredients").then((response) => {
+            setIngredients(response.data);
+        });
+    };
+
+    useEffect(() => {
+        getIngredients()
+    }, []);
+
+    const ingredientOptions = [];
+    ingredientOptions.push(<option key="blank" value=""></option>);
+    for (let i = 0; i < ingredients.length; i++) {
+        ingredientOptions.push(<option key={ingredients[i]['barcode']} value={ingredients[i]['barcode']}>{ingredients[i]['iname']} ({ingredients[i]['barcode']})</option>);
+    }
+
+    return <div><select name={props.name} onChange={props.onChange}>{ingredientOptions}</select></div>;
+}
+
+export function Location(props) {
+    const [locations, setLocations] = useState([]);
+    const getLocations = () => {
+        Axios.get("http://localhost:3001/getLocations").then((response) => {
+            setLocations(response.data);
+        });
+    };
+
+    useEffect(() => {
+        getLocations()
+    }, []);
+
+    const locationOptions = [];
+    locationOptions.push(<option key="blank" value=""></option>);
+    for (let i = 0; i < locations.length; i++) {
+        locationOptions.push(<option key={locations[i]['label']} value={locations[i]['label']}>{locations[i]['label']}</option>);
+    }
+
+    return <div><select name={props.name} onChange={props.onChange}>{locationOptions}</select></div>;
 }

@@ -75,6 +75,30 @@ app.post("/getDronesById", (req, res) => {
     res.json(result);
   });
 });
+
+app.get("/getIngredients", (req, res) => {
+  db.query("SELECT * FROM ingredients", (err, result) => {
+    if (err) {
+      res.header('Access-Control-Allow-Origin', '*');
+      res.json({ message: "Get Error" });
+    }  
+
+    res.header('Access-Control-Allow-Origin', '*');
+    res.json(result);
+  });
+});
+
+app.get("/getLocations", (req, res) => {
+  db.query("SELECT * FROM locations", (err, result) => {
+    if (err) {
+      res.header('Access-Control-Allow-Origin', '*');
+      res.json({ message: "Get Error" });
+    }  
+
+    res.header('Access-Control-Allow-Origin', '*');
+    res.json(result);
+  });
+});
 /** END GET FOR INPUTS */
 
 app.post("/add_owner", (req, res) => {
@@ -437,7 +461,7 @@ app.post("/hire_employee", (req, res) => {
 });
 
 app.get("/hire_employee", (req, res) => {
-  db.query("SELECT * FROM work_for", (err, result) => {
+  db.query("SELECT work_for.*, CONCAT(users.first_name, ' ', users.last_name) as name, delivery_services.long_name FROM work_for, users, delivery_services WHERE work_for.username = users.username and delivery_services.id = work_for.id", (err, result) => {
     if (err) {
       console.log(err);
       res.json({ message: "Get Error" })
@@ -495,7 +519,7 @@ app.post("/manage_service", (req, res) => {
 });
 
 app.get("/manage_service", (req, res) => {
-  db.query("SELECT * FROM delivery_services", (err, result) => {
+  db.query("SELECT id, long_name, manager FROM delivery_services", (err, result) => {
     if (err) {
       console.log(err);
       res.json({ message: "Get Error" })
@@ -602,7 +626,7 @@ app.post("/load_drone", (req, res) => {
   const ip_more_packages = parseInt(req.body.ip_more_packages);
   const ip_price = parseInt(req.body.ip_price);
 
-  db.query(`call load_drone(?,?,?,?)`, [ip_id, ip_tag, ip_barcode, ip_more_packages, ip_price],
+  db.query(`call load_drone(?,?,?,?, ?)`, [ip_id, ip_tag, ip_barcode, ip_more_packages, ip_price],
     (err, result) => {
       if (err) {
         console.log(err);

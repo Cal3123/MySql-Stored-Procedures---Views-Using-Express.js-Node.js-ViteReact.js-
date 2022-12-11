@@ -11,19 +11,21 @@ function Takeover_drone() {
   const [notification, setNotification] = useState("");
 
   const takeoverDrone = () => {
-
-    if(ip_username.length > 0 && ip_id.length > 0 && ip_tag > -1){
-        Axios.post("http://localhost:3001/takeover_drone", {
-          ip_username: ip_owner,
-          ip_id: ip_long_name,
-          ip_tag: ip_tag
-        }).then((res) => {
-            setNotification(res.data.message)
-        });
+    if (ip_username.length < 1) {
+      setNotification("Please Enter a Valid Username");
+    } else if (ip_id.length < 1) {
+      setNotification("Please Select a Valid Delivery Service");
+    } else if (ip_tag < 0) {
+      setNotification("Please Select a Valid Drone");
     } else {
-      setNotification("One of your field(s) is empty");
+      Axios.post("http://localhost:3001/takeover_drone", {
+        ip_username: ip_owner,
+        ip_id: ip_long_name,
+        ip_tag: ip_tag
+      }).then((res) => {
+          setNotification(res.data.message)
+      });
     }
-
   };
 
   const colNames = ["Pilot Username", "Delivery Service ID", "Drone Tag"];

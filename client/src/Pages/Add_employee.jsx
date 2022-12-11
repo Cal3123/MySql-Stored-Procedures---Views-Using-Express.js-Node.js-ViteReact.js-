@@ -2,12 +2,13 @@ import "./App.css";
 import { useState } from "react";
 import Axios from "axios";
 import Table from "../Components/Table/Table"
+import { UsernameSelect } from "../Components/Form";
 
 function Add_employee() {
     const [ip_username, setIpUsername] = useState("");
-    const [ip_first_name, setIpTag] = useState("");
-    const [ip_last_name, setIpFuel] = useState("");
-    const [ip_address, setIpCapacity] = useState("");
+    const [ip_first_name, setIpFirstName] = useState("");
+    const [ip_last_name, setIpLastName] = useState("");
+    const [ip_address, setIpAddress] = useState("");
     const [ip_birthdate, setIpBirthDate] = useState(null);
     const [ip_taxID, setIpTaxId] = useState("");
     const [ip_hired, setIpHired] = useState(null);
@@ -20,9 +21,25 @@ function Add_employee() {
 
     
     const addEmployee = () => {
-  
-      if(ip_username.length > 0 && ip_first_name.length > 0 && ip_employee_experience !== 0 && ip_salary !== 0
-         && ip_taxID.length > 0 && ip_last_name.length > 0 && ip_hired != null && ip_birthdate != null && ip_address.length> 0 ){
+      if (ip_username.length < 1) {
+        setNotification("Please Enter a Valid Username");
+      } else if (ip_first_name.length < 1) {
+        setNotification("Please Enter a Valid First Name. Employees Without a Name Should See HR");
+      } else if (ip_last_name.length < 1) {
+        setNotification("Please Enter a Valid Last Name. Employees Without a Last Name Cannot Be Employed");
+      } else if (ip_employee_experience < 0) {
+        setNotification("Employees Cannot Have Negative Experience");
+      } else if (ip_salary < 0) {
+        setNotification("Employees Cannot Pay To Work");
+      } else if (ip_taxID.length < 1) {
+        setNotification("Invalid Tax ID. Tax Evasion Not Permitted.");
+      } else if (ip_address.length < 1) {
+        setNotification("Please Entera  Valid Address");
+      } else if (ip_birthdate == null) {
+        setNotification("Please Enter a Valid Birth Date. Aliens NOT Permitted.");
+      } else if (ip_hired === null) {
+        setNotification("Please Enter a Valid Hire Date");
+      } else {
           Axios.post("http://localhost:3001/add_employee", {
             ip_username : ip_username,
             ip_first_name : ip_first_name,
@@ -36,10 +53,7 @@ function Add_employee() {
           }).then((res) => {
               setNotification(res.data.message)
           });
-      } else {
-        setNotification("One of your field(s) is empty");
       }
-  
     };
   
     const getEmployees = () => {
@@ -58,30 +72,30 @@ function Add_employee() {
     return (
       <>
         <div className="App">
-          <text >  Add Employee Procedure </text>
-          <h1>{notification}</h1>
+          <h1 >  Add Employee Procedure </h1>
+          <h2>{notification}</h2>
           <div className="information">
             <label>{colNames[0]}:</label>
-            <UsernameSelect name="username" onChange={(event) => {setIpUsername(event.target.value);}} />
+            <input type="text" onChange={(event) => {setIpUsername(event.target.value);}} />
             <label>{colNames[1]}:</label>
             <input
               type="text"
               onChange={(event) => {
-                setIpTag(event.target.value);
+                setIpFirstName(parseInt(event.target.value));
               }}
             />
             <label>{colNames[2]}:</label>
             <input
               type="text"
               onChange={(event) => {
-                setIpFuel(event.target.value);
+                setIpLastName(parseInt(event.target.value));
               }}
             />
             <label>{colNames[3]}:</label>
             <input
               type="text"
               onChange={(event) => {
-                setIpCapacity(event.target.value);
+                setIpAddress(event.target.value);
               }}
             />
             <label>{colNames[4]}:</label>
@@ -98,43 +112,31 @@ function Add_employee() {
                 setIpTaxId(event.target.value);
               }}
             />
-                        <input
+            <label>{colNames[6]}:</label>
+            <input
               type="date"
               onChange={(event) => {
                 setIpHired(event.target.value);
-              }}
-            />
-            <label>{colNames[6]}:</label>
-            <input
-              type="number"
-              onChange={(event) => {
-                setEmployeeExperience(event.target.value);
               }}
             />
             <label>{colNames[7]}:</label>
             <input
               type="number"
               onChange={(event) => {
-                setIpSalary(event.target.value);
-              }}
+                setEmployeeExperience(parseInt(event.target.value));
+              }} defaultValue="0"
+            />
+            <label>{colNames[8]}:</label>
+            <input
+              type="number"
+              onChange={(event) => {
+                setIpSalary(parseInt(event.target.value));
+              }} placeholder="Salary"
             />
             <button onClick={addEmployee}>Add Drone</button>
           </div>
           <div className="employees">
             <button onClick={getEmployees}>Show Drones</button>
-              
-  
-            {/*pilots.map((val, key) => {
-              return (
-                <div className="employee">
-                  <div>
-                    <h3>Username: {val.username}</h3>
-                    <h3>LicenseID: {val.licenseID}</h3>
-                    <h3>PilotExperiencee: {val.experience}</h3>
-                  </div>
-                </div>
-              );
-            })*/}
           </div>
       </div>
       <Table list={employees}/>
