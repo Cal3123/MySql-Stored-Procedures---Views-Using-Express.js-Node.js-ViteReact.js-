@@ -2,7 +2,7 @@ import "./App.css";
 import { useState } from "react";
 import Axios from "axios";
 import Table from "../Components/Table/Table"
-import { UsernameSelect } from "../Components/Form";
+import { RestaurantSelect, UsernameSelect } from "../Components/Form";
 
 function Start_funding() {
   const [ip_owner, setOwner] = useState("");
@@ -33,14 +33,9 @@ function Start_funding() {
         <h1>Set Funder</h1>
           <h2>{notification}</h2>
           <label>{colNames[0]}:</label>
-          <UsernameSelect name="test" onChange={(event) => {setOwner(event.target.value);}} />
+          <UsernameSelect name="username" onChange={(event) => {setOwner(event.target.value);}} />
           <label>{colNames[1]}:</label>
-          <input
-            type="text"
-            onChange={(event) => {
-              setRestaurantName(event.target.value);
-            }}
-          />
+          <RestaurantSelect name="restaurant" onChange={(event) => {setRestaurantName(event.target.value);}} />
           <button onClick={startFunding}>Start Funding</button>
         </div>
     </div>

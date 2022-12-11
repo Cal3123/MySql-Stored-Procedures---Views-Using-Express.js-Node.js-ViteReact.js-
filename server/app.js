@@ -19,7 +19,6 @@ const db = mysql.createConnection({
 app.get("/getUsernames", (req, res) => {
   db.query("SELECT username FROM users", (err, result) => {
     if (err) {
-      console.log(err);
       res.header('Access-Control-Allow-Origin', '*');
       res.json({ message: "Get Error" });
     }  
@@ -30,6 +29,22 @@ app.get("/getUsernames", (req, res) => {
     }
     res.header('Access-Control-Allow-Origin', '*');
     res.json(usernames);
+  });
+});
+
+app.get("/getRestaurants", (req, res) => {
+  db.query("SELECT long_name FROM restaurants", (err, result) => {
+    if (err) {
+      res.header('Access-Control-Allow-Origin', '*');
+      res.json({ message: "Get Error" });
+    }  
+
+    const restaurants = [];
+    for (let i = 0; i < result.length; i++) {
+      restaurants.push(result[i]["long_name"]);
+    }
+    res.header('Access-Control-Allow-Origin', '*');
+    res.json(restaurants);
   });
 });
 /** END GET FOR INPUTS */

@@ -22,3 +22,24 @@ export function UsernameSelect(props) {
 
     return <div><select name={props.name} onChange={props.onChange}>{usernameOptions}</select></div>;
 }
+
+export function RestaurantSelect(props) {
+    const [restaurants, setRestaurants] = useState([]);
+    const options = [];
+    const getRestaurants = () => {
+        Axios.get("http://localhost:3001/getRestaurants").then((response) => {
+            setRestaurants(response.data);
+        });
+    };
+
+    useEffect(() => {
+        getRestaurants()
+    }, []);
+
+    const restaurantOptions = [];
+    for (let i = 0; i < restaurants.length; i++) {
+        restaurantOptions.push(<option value={restaurants[i]}>{restaurants[i]}</option>);
+    }
+
+    return <div><select name={props.name} onChange={props.onChange}>{restaurantOptions}</select></div>;
+}
