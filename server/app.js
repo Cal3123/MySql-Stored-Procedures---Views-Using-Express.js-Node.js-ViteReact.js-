@@ -507,7 +507,7 @@ app.post("/manage_service", (req, res) => {
 });
 
 app.get("/manage_service", (req, res) => {
-  db.query("SELECT * FROM delivery_services", (err, result) => {
+  db.query("SELECT id, long_name, manager FROM delivery_services", (err, result) => {
     if (err) {
       console.log(err);
       res.json({ message: "Get Error" })
