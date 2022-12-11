@@ -266,7 +266,6 @@ app.post("/add_drone", (req, res) => {
   const ip_capacity = parseInt(req.body.ip_capacity);
   const ip_sales = parseInt(req.body.ip_sales);
   const ip_flown_by = req.body.ip_flown_by;
-
   db.query(`call add_drone(?,?,?,?,?,?)`, [ip_id, ip_tag, ip_fuel, ip_capacity, ip_sales, ip_flown_by],
     (err, result) => {
       if (err) {

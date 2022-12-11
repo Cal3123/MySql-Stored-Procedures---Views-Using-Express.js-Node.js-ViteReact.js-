@@ -28,10 +28,9 @@ function Add_drone() {
         setNotification("Drones Cannot Have Negative Sales. Review Balance Sheets.")
       }  else if (ip_fuel < 0) {
         setNotification("Drones Cannot Have Negative Fuel");
+      } else if (ip_flown_by.length < 1) {
+        setNotification("Drone Must Have Initial Pilot");
       } else {
-          if (ip_flown_by.length < 1) {
-            setIpFlownBy(null);
-          }
           Axios.post("http://localhost:3001/add_drone", {
             ip_id : ip_id,
             ip_tag : ip_tag,
