@@ -10,6 +10,7 @@ function Load_drone() {
   const [ip_barcode, setBarcode] = useState("");
   const [packageCount, setPackageCount] = useState(0);
   const [price, setPrice] = useState(-1);
+  const [loads, setLoads] = useState([]);
   const [notification, setNotification] = useState("");
 
   const loadDrone = () => {
@@ -36,6 +37,17 @@ function Load_drone() {
     }
   };
 
+  const getLoads = () => {
+    Axios.get("http://localhost:3001/load_drone").then((response) => {
+      if(response.message === "Get Error") {
+        setNotification("Get Error")
+      } else {
+        setLoads(response.data);
+      }
+      
+    });
+  };
+
   const colNames = ["Delivery Service", "Drone Tag", "Item Barcode", "Additional Package Count", "Price"];
  
   return (
@@ -54,9 +66,11 @@ function Load_drone() {
           <input type="number" min="1" placeholder="Package Count" onChange={(event) => {setPackageCount(parseInt(event.target.value));}} />
           <label>{colNames[4]}:</label>
           <input type="number" min="0" placeholder="Price" onChange={(event) => {setPrice(parseInt(event.target.value));}} />
-          <button onClick={loadDrone}>Takeover Drone</button>
+          <button onClick={loadDrone}>Load Drone</button>
+          <button onClick={getLoads}>View Loads</button>
         </div>
     </div>
+    <Table list={loads}/>
     </>
   );  
 }
