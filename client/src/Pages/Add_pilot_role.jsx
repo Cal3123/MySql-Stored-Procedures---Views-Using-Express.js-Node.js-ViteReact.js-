@@ -77,7 +77,7 @@ function Add_pilot_role() {
           })*/}
         </div>
     </div>
-    <Table list={pilots}/>
+    <Table list={pilots} colNames={colNames} />
     </>
   );  
 }

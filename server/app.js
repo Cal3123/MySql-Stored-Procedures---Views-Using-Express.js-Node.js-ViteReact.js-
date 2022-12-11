@@ -5,7 +5,7 @@ const cors = require("cors");
 const dotenv = require("dotenv");
 dotenv.config();
 
-// app.use(cors());
+app.use(cors());
 app.use(express.json());
 
 const db = mysql.createConnection({
@@ -45,6 +45,34 @@ app.get("/getRestaurants", (req, res) => {
     }
     res.header('Access-Control-Allow-Origin', '*');
     res.json(restaurants);
+  });
+});
+
+app.get("/getServices", (req, res) => {
+  db.query("SELECT id, long_name FROM delivery_services", (err, result) => {
+    if (err) {
+      res.header('Access-Control-Allow-Origin', '*');
+      res.json({ message: "Get Error" });
+    }  
+
+    const services = [];
+    for (let i = 0; i < result.length; i++) {
+      services.push({'id': result[i]["id"], 'long_name': result[i]["long_name"]});
+    }
+    res.header('Access-Control-Allow-Origin', '*');
+    res.json(services);
+  });
+});
+
+app.post("/getDronesById", (req, res) => {
+  db.query("SELECT * FROM drones WHERE id = ?", [req.body.ip_id], (err, result) => {
+    if (err) {
+      res.header('Access-Control-Allow-Origin', '*');
+      res.json({ message: "Get Error" });
+    }  
+
+    res.header('Access-Control-Allow-Origin', '*');
+    res.json(result);
   });
 });
 /** END GET FOR INPUTS */
