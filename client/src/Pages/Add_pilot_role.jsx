@@ -2,6 +2,7 @@ import "./App.css";
 import { useState } from "react";
 import Axios from "axios";
 import Table from "../Components/Table/Table"
+import { UsernameSelect } from "../Components/Form";
 
 function Add_pilot_role() {
   const [ip_username, setUserName] = useState("");
@@ -43,12 +44,7 @@ function Add_pilot_role() {
         <text >  Pilot  Procedure</text>
           <h1>{notification}</h1>
           <label>{colNames[0]}:</label>
-          <input
-            type="text"
-            onChange={(event) => {
-              setUserName(event.target.value);
-            }}
-          />
+          <UsernameSelect name="username" onChange={(event) => {setUserName(event.target.value);}} />
           <label>{colNames[1]}:</label>
           <input
             type="text"

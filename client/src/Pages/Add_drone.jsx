@@ -2,6 +2,7 @@ import "./App.css";
 import { useState } from "react";
 import Axios from "axios";
 import Table from "../Components/Table/Table"
+import { UsernameSelect } from "../Components/Form";
 
 function Add_drone() {
     const [ip_id, setIpId] = useState("");
@@ -87,12 +88,7 @@ function Add_drone() {
               }}
             />
             <label>{colNames[5]}:</label>
-            <input
-              type="text"
-              onChange={(event) => {
-                setIpFlownBy(event.target.value);
-              }}
-            />
+            <UsernameSelect name="flown_by" onChange={(event) => {setIpFlownBy(event.target.value);}} />
             <button onClick={addDrone}>Add Drone</button>
           </div>
           <div className="employees">

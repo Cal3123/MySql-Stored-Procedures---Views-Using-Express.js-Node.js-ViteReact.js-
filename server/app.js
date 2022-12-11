@@ -17,7 +17,7 @@ const db = mysql.createConnection({
 
 /** START GET FOR INPUTS */
 app.get("/getUsernames", (req, res) => {
-  db.query("SELECT username FROM users", (err, result) => {
+  db.query("SELECT username, concat(first_name, ' ', last_name, ' (', username, ')') as name FROM users", (err, result) => {
     if (err) {
       res.header('Access-Control-Allow-Origin', '*');
       res.json({ message: "Get Error" });
@@ -25,7 +25,7 @@ app.get("/getUsernames", (req, res) => {
 
     const usernames = [];
     for (let i = 0; i < result.length; i++) {
-      usernames.push(result[i]["username"]);
+      usernames.push({'username': result[i]["username"], 'name': result[i]["name"]});
     }
     res.header('Access-Control-Allow-Origin', '*');
     res.json(usernames);
