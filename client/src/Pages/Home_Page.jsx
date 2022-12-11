@@ -15,7 +15,7 @@ const Home_Page = () => {
 
         const itemObjects = [];
         for (let i = 0; i < items.length; i++) {
-            itemObjects.push(<Item path={items[i]["path"]} text={items[i]["text"]} />)
+            itemObjects.push(<Item path={items[i]["path"]} text={items[i]["text"]} key={items[i]["path"]} />)
         }
 
         return itemObjects;
