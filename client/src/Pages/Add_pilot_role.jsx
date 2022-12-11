@@ -10,7 +10,6 @@ function Add_pilot_role() {
   const [ip_pilot_experience, setPilotExperience] = useState(0);
   const [pilots, setPilots] = useState([]);
   const [notification, setNotification] = useState("");
-
   const addPilot = () => {
 
     if(ip_username.length > 0 && ip_licenseID.length > 0 && ip_pilot_experience.length > 0 

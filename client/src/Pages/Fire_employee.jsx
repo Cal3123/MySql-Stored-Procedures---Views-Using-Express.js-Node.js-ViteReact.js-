@@ -60,10 +60,10 @@ function Fire_employee() {
                 setIpID(event.target.value);
               }}
             />
-            <button onClick={fireEmployee}>Add Drone</button>
+            <button onClick={fireEmployee}>Fire Employee</button>
           </div>
           <div className="employees">
-            <button onClick={getEmployees}>Show Drones</button>
+            <button onClick={getEmployees}>Show Employees</button>
               
   
             {/*pilots.map((val, key) => {

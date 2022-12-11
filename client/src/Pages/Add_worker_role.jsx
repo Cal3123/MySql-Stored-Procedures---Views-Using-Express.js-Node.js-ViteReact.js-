@@ -6,9 +6,7 @@ import Table from "../Components/Table/Table"
 function Add_worker_role() {
     const [ip_username, setIpUsername] = useState("");
     const colNames = ["Username"];
-
-
-
+    const [notification, setNotification] = useState("");
     
     const addWorker_role = () => {
   

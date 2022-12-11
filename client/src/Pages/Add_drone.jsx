@@ -95,7 +95,7 @@ function Add_drone() {
             <button onClick={getDrones}>Show Drones</button>
               
   
-            {/*pilots.map((val, key) => {
+            {/*pilots.map(drones) => {
               return (
                 <div className="employee">
                   <div>
