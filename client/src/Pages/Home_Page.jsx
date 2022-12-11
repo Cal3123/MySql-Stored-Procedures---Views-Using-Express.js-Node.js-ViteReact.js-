@@ -18,9 +18,9 @@ const Home_Page = () => {
             {"path": "/add_restaurant", "text": "Add Restaurant"},
             {"path": "/add_service", "text": "Add Delivery Service"},
             {"path": "/add_worker_role", "text": "Add Worker Role"},
-            {"path": "/display_employee_view", "text": "Display_employee_view"},
-            {"path": "/display_location_view", "text": "Display_location_view"},
-            {"path": "/display_ingredient_view", "text": "Display_ingredient_view"},
+            {"path": "/display_employee_view", "text": "Display Employee View"},
+            {"path": "/display_location_view", "text": "Display Location View"},
+            {"path": "/display_ingredient_view", "text": "Display Ingredient View"},
             {"path": "/display_owner_view ", "text": "Display_owner_view "},
             {"path": "/display_pilot_view", "text": "Display_pilot_view"},
             {"path": "/display_service_view", "text": "Display_service_view"},
@@ -36,8 +36,7 @@ const Home_Page = () => {
             {"path": "/remove_drone", "text": "Remove_drone"},
             {"path": "/remove_ingredient", "text": "Remove_ingredient"},
             {"path": "/remove_pilot_role", "text": "Remove_pilot_role"},
-            {"path": "/start_funding", "text": "Start Funding"},
-            {"path": "/add_owner", "text": "Add Owner"},
+            {"path": "/start_funding", "text": "Start Funding"}
         ];
 
         const itemObjects = [];

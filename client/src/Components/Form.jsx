@@ -62,7 +62,7 @@ export function DeliveryService(props) {
     const serviceOptions = [];
     serviceOptions.push(<option key="blank" value=""></option>);
     for (let i = 0; i < services.length; i++) {
-        serviceOptions.push(<option key={services[i]['id']} value={services[i]['id']}>{services[i]['long_name']}</option>);
+        serviceOptions.push(<option key={services[i]['id']} value={services[i]['id']}>{services[i]['long_name']} ({services[i]['id']})</option>);
     }
 
     return <div><select name={props.name} onChange={props.onChange}>{serviceOptions}</select></div>;

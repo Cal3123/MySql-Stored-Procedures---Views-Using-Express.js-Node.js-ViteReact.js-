@@ -2,6 +2,7 @@ import "./App.css";
 import { useState } from "react";
 import Axios from "axios";
 import Table from "../Components/Table/Table"
+import { DeliveryService, UsernameSelect } from "../Components/Form"
 
 function Hire_employee() {
     const [ip_owner, setOwner] = useState("");
@@ -43,43 +44,20 @@ function Hire_employee() {
     return (
       <>
         <div className="App">
-          <text >  Add Employee Procedure </text>
-          <h1>{notification}</h1>
+          <h1>Add Employee Procedure </h1>
+          <h2>{notification}</h2>
           <div className="information">
             <label>{colNames[0]}:</label>
-            <input
-              type="text"
-              onChange={(event) => {
-                setOwner(event.target.value);
-              }}
-            />
+            <UsernameSelect name="username" onChange={(event) => {setOwner(event.target.value);}} />
             <label>{colNames[1]}:</label>
-            <input
-              type="text"
-              onChange={(event) => {
-                setId(event.target.value);
-              }}
-            />
+            <DeliveryService name="service" onChange={(event) => {setId(event.target.value);}} />
             <button onClick={hireEmployee}>Hire Employee</button>
           </div>
           <div className="employees">
             <button onClick={getEmployees}>Show Employees</button>
-              
-  
-            {/*pilots.map((val, key) => {
-              return (
-                <div className="employee">
-                  <div>
-                    <h3>Username: {val.username}</h3>
-                    <h3>LicenseID: {val.licenseID}</h3>
-                    <h3>PilotExperiencee: {val.experience}</h3>
-                  </div>
-                </div>
-              );
-            })*/}
           </div>
       </div>
-      <Table list={employees}/>
+      <Table list={employees} />
       </>
     );  
   }

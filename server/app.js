@@ -437,7 +437,7 @@ app.post("/hire_employee", (req, res) => {
 });
 
 app.get("/hire_employee", (req, res) => {
-  db.query("SELECT * FROM work_for", (err, result) => {
+  db.query("SELECT work_for.*, CONCAT(users.first_name, ' ', users.last_name) as name, delivery_services.long_name FROM work_for, users, delivery_services WHERE work_for.username = users.username and delivery_services.id = work_for.id", (err, result) => {
     if (err) {
       console.log(err);
       res.json({ message: "Get Error" })

@@ -2,6 +2,7 @@ import "./App.css";
 import { useState } from "react";
 import Axios from "axios";
 import Table from "../Components/Table/Table"
+import { UsernameSelect } from "../Components/Form";
 
 function Add_employee() {
     const [ip_username, setIpUsername] = useState("");
@@ -58,11 +59,11 @@ function Add_employee() {
     return (
       <>
         <div className="App">
-          <text >  Add Employee Procedure </text>
-          <h1>{notification}</h1>
+          <h1 >  Add Employee Procedure </h1>
+          <h2>{notification}</h2>
           <div className="information">
             <label>{colNames[0]}:</label>
-            <UsernameSelect name="username" onChange={(event) => {setIpUsername(event.target.value);}} />
+            <input type="text" onChange={(event) => {setIpUsername(event.target.value);}} />
             <label>{colNames[1]}:</label>
             <input
               type="text"
@@ -98,43 +99,31 @@ function Add_employee() {
                 setIpTaxId(event.target.value);
               }}
             />
-                        <input
+            <label>{colNames[6]}:</label>
+            <input
               type="date"
               onChange={(event) => {
                 setIpHired(event.target.value);
-              }}
-            />
-            <label>{colNames[6]}:</label>
-            <input
-              type="number"
-              onChange={(event) => {
-                setEmployeeExperience(event.target.value);
               }}
             />
             <label>{colNames[7]}:</label>
             <input
               type="number"
               onChange={(event) => {
+                setEmployeeExperience(event.target.value);
+              }} defaultValue="0"
+            />
+            <label>{colNames[8]}:</label>
+            <input
+              type="number"
+              onChange={(event) => {
                 setIpSalary(event.target.value);
-              }}
+              }} placeholder="Salary"
             />
             <button onClick={addEmployee}>Add Drone</button>
           </div>
           <div className="employees">
             <button onClick={getEmployees}>Show Drones</button>
-              
-  
-            {/*pilots.map((val, key) => {
-              return (
-                <div className="employee">
-                  <div>
-                    <h3>Username: {val.username}</h3>
-                    <h3>LicenseID: {val.licenseID}</h3>
-                    <h3>PilotExperiencee: {val.experience}</h3>
-                  </div>
-                </div>
-              );
-            })*/}
           </div>
       </div>
       <Table list={employees}/>
