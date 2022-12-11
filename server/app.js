@@ -9,10 +9,10 @@ app.use(cors());
 app.use(express.json());
 
 const db = mysql.createConnection({
-  user: "sqluser",
-  host: "localhost",
-  password: process.env.PASSWORD,
-  database: "restaurant_supply_express",
+  user: process.env.DATABASE_USER,
+  host: process.env.DATABASE_HOST,
+  password: process.env.DATABASE_PASSWORD,
+  database: process.env.DATABASE_NAME
 });
 
 
