@@ -2,6 +2,7 @@ import "./App.css";
 import { useState } from "react";
 import Axios from "axios";
 import Table from "../Components/Table/Table"
+import { UsernameSelect } from "../Components/Form";
 
 function Add_owner() {
     const [ip_username, setIpUsername] = useState("");
@@ -52,12 +53,7 @@ function Add_owner() {
           <h1>{notification}</h1>
           <div className="information">
             <label>{colNames[0]}:</label>
-            <input
-              type="text"
-              onChange={(event) => {
-                setIpUsername(event.target.value);
-              }}
-            />
+            <UsernameSelect name="username" onChange={(event) => {setIpUsername(event.target.value);}} />
             <label>{colNames[1]}:</label>
             <input
               type="text"

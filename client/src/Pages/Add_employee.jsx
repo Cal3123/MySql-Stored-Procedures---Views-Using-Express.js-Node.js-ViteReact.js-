@@ -62,12 +62,7 @@ function Add_employee() {
           <h1>{notification}</h1>
           <div className="information">
             <label>{colNames[0]}:</label>
-            <input
-              type="text"
-              onChange={(event) => {
-                setIpUsername(event.target.value);
-              }}
-            />
+            <UsernameSelect name="username" onChange={(event) => {setIpUsername(event.target.value);}} />
             <label>{colNames[1]}:</label>
             <input
               type="text"

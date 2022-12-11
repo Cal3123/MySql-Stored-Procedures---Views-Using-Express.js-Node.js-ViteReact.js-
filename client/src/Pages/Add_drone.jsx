@@ -2,7 +2,7 @@ import "./App.css";
 import { useState } from "react";
 import Axios from "axios";
 import Table from "../Components/Table/Table"
-import { UsernameSelect } from "../Components/Form";
+import { DeliveryService, UsernameSelect } from "../Components/Form";
 
 function Add_drone() {
     const [ip_id, setIpId] = useState("");
@@ -53,12 +53,7 @@ function Add_drone() {
           <text >  Add Drone  Procedure</text>
           <h1>{notification}</h1>
             <label>{colNames[0]}:</label>
-            <input
-              type="text"
-              onChange={(event) => {
-                setIpId(event.target.value);
-              }}
-            />
+            <DeliveryService name="service" onChange={(event) => {setIpId(event.target.value);}} />
             <label>{colNames[1]}:</label>
             <input
               type="number"
