@@ -115,7 +115,7 @@ app.post("/add_owner", (req, res) => {
         console.log(err);
         res.send("Error detected")
       } else {
-        res.send("Values Inserted");
+        res.send("Request Sent to Server");
       }
     }
   );
@@ -151,7 +151,7 @@ app.post("/add_employee", (req, res) => {
         console.log(err);
         res.send("Error detected")
       } else {
-        res.send("Values Inserted");
+        res.send("Request Sent to Server");
       }
     }
   );
@@ -182,7 +182,7 @@ app.post("/add_pilot_role", (req, res) => {
         res.json({ message: "Error detected" })
         //res.send("Error detected")
       } else {
-        res.json({message: "Values inserted" })
+        res.json({message: "Request Sent to Server" })
       }
     }
   );
@@ -211,7 +211,7 @@ app.post("/add_worker_role", (req, res) => {
         res.json({ message: "Error detected" })
         //res.send("Error detected")
       } else {
-        res.json({message: "Values inserted" })
+        res.json({message: "Request Sent to Server" })
       }
     }
   );
@@ -241,7 +241,7 @@ app.post("/add_ingredient", (req, res) => {
         res.json({ message: "Error detected" })
         //res.send("Error detected")
       } else {
-        res.json({message: "Values inserted" })
+        res.json({message: "Request Sent to Server" })
       }
     }
   );
@@ -273,7 +273,7 @@ app.post("/add_drone", (req, res) => {
         res.json({ message: "Error detected" })
         //res.send("Error detected")
       } else {
-        res.json({message: "Values inserted" })
+        res.json({message: "Request Sent to Server" })
       }
     }
   );
@@ -304,7 +304,7 @@ app.post("/add_restaurant", (req, res) => {
         res.json({ message: "Error detected" })
         //res.send("Error detected")
       } else {
-        res.json({message: "Values inserted" })
+        res.json({message: "Request Sent to Server" })
       }
     }
   );
@@ -335,7 +335,7 @@ app.post("/add_service", (req, res) => {
         res.json({ message: "Error detected" })
         //res.send("Error detected")
       } else {
-        res.json({message: "Values inserted" })
+        res.json({message: "Request Sent to Server" })
       }
     }
   );
@@ -366,7 +366,7 @@ app.post("/add_location", (req, res) => {
         res.json({ message: "Error detected" })
         //res.send("Error detected")
       } else {
-        res.json({message: "Values inserted" })
+        res.json({message: "Request Sent to Server" })
       }
     }
   );
@@ -395,7 +395,7 @@ app.post("/start_funding", (req, res) => {
         res.json({ message: "Error detected" })
         //res.send("Error detected")
       } else {
-        res.json({message: "Values inserted" })
+        res.json({message: "Request Sent to Server" })
       }
     }
   );
@@ -424,7 +424,7 @@ app.post("/start_funding", (req, res) => {
         res.json({ message: "Error detected" })
         //res.send("Error detected")
       } else {
-        res.json({message: "Values inserted" })
+        res.json({message: "Request Sent to Server" })
       }
     }
   );
@@ -453,7 +453,7 @@ app.post("/hire_employee", (req, res) => {
         res.json({ message: "Error detected" })
         //res.send("Error detected")
       } else {
-        res.json({message: "Values inserted" })
+        res.json({message: "Request Sent to Server" })
       }
     }
   );
@@ -482,7 +482,7 @@ app.post("/fire_employee", (req, res) => {
         res.json({ message: "Error detected" })
         //res.send("Error detected")
       } else {
-        res.json({message: "Values inserted" })
+        res.json({message: "Request Sent to Server" })
       }
     }
   );
@@ -511,7 +511,7 @@ app.post("/manage_service", (req, res) => {
         res.json({ message: "Error detected" })
         //res.send("Error detected")
       } else {
-        res.json({message: "Values inserted" })
+        res.json({message: "Request Sent to Server" })
       }
     }
   );
@@ -541,7 +541,7 @@ app.post("/takeover_drone", (req, res) => {
         res.json({ message: "Error detected" })
         //res.send("Error detected")
       } else {
-        res.json({message: "Values inserted" })
+        res.json({message: "Request Sent to Server" })
       }
     }
   );
@@ -571,7 +571,7 @@ app.post("/join_swarm", (req, res) => {
         res.json({ message: "Error detected" })
         //res.send("Error detected")
       } else {
-        res.json({message: "Values inserted" })
+        res.json({message: "Request Sent to Server" })
       }
     }
   );
@@ -600,7 +600,7 @@ app.post("/leave_swarm", (req, res) => {
         res.json({ message: "Error detected" })
         //res.send("Error detected")
       } else {
-        res.json({message: "Values inserted" })
+        res.json({message: "Request Sent to Server" })
       }
     }
   );
@@ -632,7 +632,7 @@ app.post("/load_drone", (req, res) => {
         res.json({ message: "Error detected" })
         //res.send("Error detected")
       } else {
-        res.json({message: "Values inserted" })
+        res.json({message: "Request Sent to Server" })
       }
     }
   );
@@ -662,7 +662,7 @@ app.post("/refuel_drone", (req, res) => {
         res.json({ message: "Error detected" })
         //res.send("Error detected")
       } else {
-        res.json({message: "Values inserted" })
+        res.json({message: "Request Sent to Server" })
       }
     }
   );
@@ -692,7 +692,7 @@ app.post("/fly_drone", (req, res) => {
         res.json({ message: "Error detected" })
         //res.send("Error detected")
       } else {
-        res.json({message: "Values inserted" })
+        res.json({message: "Request Sent to Server" })
       }
     }
   );
@@ -724,7 +724,7 @@ app.post("/purchase_ingredient", (req, res) => {
         res.json({ message: "Error detected" })
         //res.send("Error detected")
       } else {
-        res.json({message: "Values inserted" })
+        res.json({message: "Request Sent to Server" })
       }
     }
   );
@@ -752,7 +752,7 @@ app.post("/remove_ingredient", (req, res) => {
         res.json({ message: "Error detected" })
         //res.send("Error detected")
       } else {
-        res.json({message: "Values inserted" })
+        res.json({message: "Request Sent to Server" })
       }
     }
   );
@@ -781,7 +781,7 @@ app.post("/remove_drone", (req, res) => {
         res.json({ message: "Error detected" })
         //res.send("Error detected")
       } else {
-        res.json({message: "Values inserted" })
+        res.json({message: "Request Sent to Server" })
       }
     }
   );
@@ -809,7 +809,7 @@ app.post("/remove_pilot_role", (req, res) => {
         res.json({ message: "Error detected" })
         //res.send("Error detected")
       } else {
-        res.json({message: "Values inserted" })
+        res.json({message: "Request Sent to Server" })
       }
     }
   );
