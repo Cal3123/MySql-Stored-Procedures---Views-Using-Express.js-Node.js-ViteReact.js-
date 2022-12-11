@@ -30,7 +30,7 @@ function Add_drone() {
         setNotification("Drones Cannot Have Negative Fuel");
       } else {
           if (ip_flown_by.length < 1) {
-            ip_flown_by = null;
+            setIpFlownBy(null);
           }
           Axios.post("http://localhost:3001/add_drone", {
             ip_id : ip_id,
@@ -63,8 +63,8 @@ function Add_drone() {
         <div className="App">
           
           <div className="information">
-          <text >  Add Drone  Procedure</text>
-          <h1>{notification}</h1>
+          <h1 >  Add Drone  Procedure</h1>
+          <h2>{notification}</h2>
             <label>{colNames[0]}:</label>
             <DeliveryService name="service" onChange={(event) => {setIpId(event.target.value); setIpTag(-1);}} />
             <label>{colNames[1]}:</label>
