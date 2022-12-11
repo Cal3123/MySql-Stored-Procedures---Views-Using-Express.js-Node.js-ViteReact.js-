@@ -58,7 +58,7 @@ function Add_pilot_role() {
           />
           <label>{colNames[2]}:</label>
           <input
-            type="number"
+            type="number" min="0"
             onChange={(event) => {
               setPilotExperience(event.target.value);
             }}
