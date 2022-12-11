@@ -2,6 +2,7 @@ import "./App.css";
 import { useState } from "react";
 import Axios from "axios";
 import Table from "../Components/Table/Table"
+import { Location, UsernameSelect } from "../Components/Form";
 
 function Add_service() {
     const [ip_id, setIpId] = useState("");
@@ -10,7 +11,7 @@ function Add_service() {
     const [ip_manager, setIpManager] = useState("");
     const [services, setServices] = useState([]);
     const [notification, setNotification] = useState("");
-    const colNames = ["Id", "Long Name", "Home Base", "Manager"];
+    const colNames = ["Delivery Service Id", "Long Name", "Home Base", "Manager"];
 
 
 
@@ -47,8 +48,8 @@ function Add_service() {
     return (
       <>
         <div className="App">
-          <text > Services </text>
-          <h1>{notification}</h1>
+          <h1 > Add Service </h1>
+          <h2>{notification}</h2>
           <div className="information">
             <label>{colNames[0]}:</label>
             <input
@@ -65,36 +66,17 @@ function Add_service() {
               }}
             />
             <label>{colNames[2]}:</label>
-            <input
-              type="text"
-              onChange={(event) => {
+            <Location name="location"  onChange={(event) => {
                 setIpHomeBase(event.target.value);
-              }}
-            />
+              }} />
             <label>{colNames[3]}:</label>
-            <input
-              type="text"
-              onChange={(event) => {
+            <UsernameSelect name="username" onChange={(event) => {
                 setIpManager(event.target.value);
-              }}
-            />
+              }} />
             <button onClick={addService}>Add Service</button>
           </div>
           <div className="services">
             <button onClick={getServices}>Show Services</button>
-              
-  
-            {/*pilots.map((val, key) => {
-              return (
-                <div className="employee">
-                  <div>
-                    <h3>Username: {val.username}</h3>
-                    <h3>LicenseID: {val.licenseID}</h3>
-                    <h3>PilotExperiencee: {val.experience}</h3>
-                  </div>
-                </div>
-              );
-            })*/}
           </div>
       </div>
       <Table list={services}/>
