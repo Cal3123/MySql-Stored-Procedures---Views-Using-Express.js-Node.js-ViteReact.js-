@@ -15,6 +15,24 @@ const db = mysql.createConnection({
   database: process.env.DATABASE_NAME
 });
 
+/** START GET FOR INPUTS */
+app.get("/getUsernames", (req, res) => {
+  db.query("SELECT username FROM users", (err, result) => {
+    if (err) {
+      console.log(err);
+      res.header('Access-Control-Allow-Origin', '*');
+      res.json({ message: "Get Error" });
+    }  
+
+    const usernames = [];
+    for (let i = 0; i < result.length; i++) {
+      usernames.push(result[i]["username"]);
+    }
+    res.header('Access-Control-Allow-Origin', '*');
+    res.json(usernames);
+  });
+});
+/** END GET FOR INPUTS */
 
 app.post("/add_owner", (req, res) => {
   const ip_username = req.body.ip_username;
