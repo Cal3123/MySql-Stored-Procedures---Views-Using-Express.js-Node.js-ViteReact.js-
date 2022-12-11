@@ -17,7 +17,7 @@ export function UsernameSelect(props) {
 
     const usernameOptions = [];
     for (let i = 0; i < usernames.length; i++) {
-        usernameOptions.push(<option value={usernames[i]}>{usernames[i]}</option>);
+        usernameOptions.push(<option key={usernames[i]} value={usernames[i]}>{usernames[i]}</option>);
     }
 
     return <div><select name={props.name} onChange={props.onChange}>{usernameOptions}</select></div>;
@@ -38,7 +38,7 @@ export function RestaurantSelect(props) {
 
     const restaurantOptions = [];
     for (let i = 0; i < restaurants.length; i++) {
-        restaurantOptions.push(<option value={restaurants[i]}>{restaurants[i]}</option>);
+        restaurantOptions.push(<option key={restaurants[i]} value={restaurants[i]}>{restaurants[i]}</option>);
     }
 
     return <div><select name={props.name} onChange={props.onChange}>{restaurantOptions}</select></div>;
