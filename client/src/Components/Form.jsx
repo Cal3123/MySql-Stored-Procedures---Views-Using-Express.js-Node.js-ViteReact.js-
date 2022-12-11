@@ -111,3 +111,24 @@ export function Ingredient(props) {
 
     return <div><select name={props.name} onChange={props.onChange}>{ingredientOptions}</select></div>;
 }
+
+export function Location(props) {
+    const [locations, setLocations] = useState([]);
+    const getLocations = () => {
+        Axios.get("http://localhost:3001/getLocations").then((response) => {
+            setLocations(response.data);
+        });
+    };
+
+    useEffect(() => {
+        getLocations()
+    }, []);
+
+    const locationOptions = [];
+    locationOptions.push(<option key="blank" value=""></option>);
+    for (let i = 0; i < locations.length; i++) {
+        locationOptions.push(<option key={locations[i]['label']} value={locations[i]['label']}>{locations[i]['label']}</option>);
+    }
+
+    return <div><select name={props.name} onChange={props.onChange}>{locationOptions}</select></div>;
+}

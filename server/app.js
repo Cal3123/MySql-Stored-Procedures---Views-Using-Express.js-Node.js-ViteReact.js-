@@ -87,6 +87,18 @@ app.get("/getIngredients", (req, res) => {
     res.json(result);
   });
 });
+
+app.get("/getLocations", (req, res) => {
+  db.query("SELECT * FROM locations", (err, result) => {
+    if (err) {
+      res.header('Access-Control-Allow-Origin', '*');
+      res.json({ message: "Get Error" });
+    }  
+
+    res.header('Access-Control-Allow-Origin', '*');
+    res.json(result);
+  });
+});
 /** END GET FOR INPUTS */
 
 app.post("/add_owner", (req, res) => {
