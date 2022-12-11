@@ -46,6 +46,24 @@ const App = () => {
        <Route path='/add_restaurant' element={<Add_restaurant />} />
        <Route path='/add_service' element={<Add_service />} />
        <Route path='/add_worker_role' element={<Add_worker_role />} />
+       <Route path='/display_employee_view' element={<Display_employee_view/>}/>
+       <Route path='/display_ingredient_view' element={<Display_ingredient_view/>}/> 
+       <Route path='/display_location_view' element={<Display_location_view/>}/> 
+       <Route path='/display_owner_view ' element={<Display_owner_view />}/> 
+       <Route path='/display_pilot_view' element={<Display_pilot_view/>}/> 
+       <Route path='/display_service_view' element={<Display_service_view/>}/> 
+       <Route path='/fire_employee' element={<Fire_employee/>}/> 
+       <Route path='/fly_drone ' element={<Fly_drone />}/> 
+       <Route path='/hire_employee' element={<Hire_employee/>}/> 
+       <Route path='/join_swarm' element={<Join_swarm/>}/> 
+       <Route path='/leave_swarm' element={<Leave_swarm/>}/> 
+       <Route path='/load_drone' element={<Load_drone/>}/> 
+       <Route path='/manage_service' element={<Manage_service/>}/> 
+       <Route path='/purchase_ingredient' element={<Purchase_ingredient/>}/> 
+       <Route path='/refuel_drone' element={<Refuel_drone/>}/> 
+       <Route path='/remove_drone' element={<Remove_drone/>}/> 
+       <Route path='/remove_ingredient' element={<Remove_ingredient/>}/> 
+        <Route path='/remove_pilot_role' element={<Remove_pilot_role/>}/> 
        <Route path='/start_funding' element={<Start_funding />} />
        <Route path='/takeover_drone' element={<Takeover_drone />} />
       </Routes>

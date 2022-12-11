@@ -18,8 +18,26 @@ const Home_Page = () => {
             {"path": "/add_restaurant", "text": "Add Restaurant"},
             {"path": "/add_service", "text": "Add Delivery Service"},
             {"path": "/add_worker_role", "text": "Add Worker Role"},
+            {"path": "/display_employee_view", "text": "Display_employee_view"},
+            {"path": "/display_location_view", "text": "Display_location_view"},
+            {"path": "/display_ingredient_view", "text": "Display_ingredient_view"},
+            {"path": "/display_owner_view ", "text": "Display_owner_view "},
+            {"path": "/display_pilot_view", "text": "Display_pilot_view"},
+            {"path": "/display_service_view", "text": "Display_service_view"},
+            {"path": "/fire_employee", "text": "Fire_employee"},
+            {"path": "/fly_drone ", "text": "Fly_drone "},
+            {"path": "/hire_employee", "text": "Hire_employee"},
+            {"path": "/join_swarm", "text": "Join_swarm"},
+            {"path": "/leave_swarm", "text": "Leave_swarm"},
+            {"path": "/load_drone", "text": "Load_drone"},
+            {"path": "/manage_service", "text": "Manage_service"},
+            {"path": "/purchase_ingredient", "text": "Purchase_ingredient"},
+            {"path": "/refuel_drone", "text": "Refuel_drone"},
+            {"path": "/remove_drone", "text": "Remove_drone"},
+            {"path": "/remove_ingredient", "text": "Remove_ingredient"},
+            {"path": "/remove_pilot_role", "text": "Remove_pilot_role"},
             {"path": "/start_funding", "text": "Start Funding"},
-            {"path": "/add_owner", "text": "Add Owner"}
+            {"path": "/add_owner", "text": "Add Owner"},
         ];
 
         const itemObjects = [];
