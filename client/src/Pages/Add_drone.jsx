@@ -86,7 +86,7 @@ function Add_drone() {
             <UsernameSelect name="flown_by" onChange={(event) => {setIpFlownBy(event.target.value);}} />
             <button onClick={addDrone}>Add Drone</button>
           </div>
-          <div className="employees">
+          <div >
             <button onClick={getDrones}>Show Drones</button>
               
   

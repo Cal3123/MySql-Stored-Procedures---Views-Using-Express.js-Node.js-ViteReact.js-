@@ -80,4 +80,4 @@ function Remove_ingredient() {
     );  
   }
   
-export default Remove_drone;
+export default Remove_ingredient;

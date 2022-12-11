@@ -14,7 +14,7 @@ function Add_restaurant() {
 
 
     
-    const addEmployee = () => {
+    const addRestaurant = () => {
   
       if(ip_long_name.length > 0 && ip_rating !== 0 && ip_spent !== 0 
         && ip_location.length > 0 ){
@@ -32,7 +32,7 @@ function Add_restaurant() {
   
     };
   
-    const getEmployees = () => {
+    const getRestaurants = () => {
       Axios.get("http://localhost:3001/add_restaurant").then((response) => {
         if(response.message === "Get Error") {
           setNotification("Get Error")
@@ -77,10 +77,10 @@ function Add_restaurant() {
                 setLocation(event.target.value);
               }}
             />
-            <button onClick={addEmployee}>Add Restaurant</button>
+            <button onClick={addRestaurant}>Add Restaurant</button>
           </div>
           <div className="restaurants">
-            <button onClick={getEmployees}>Show Restaurants</button>
+            <button onClick={getRestaurants}>Show Restaurants</button>
               
   
             {/*pilots.map((val, key) => {
