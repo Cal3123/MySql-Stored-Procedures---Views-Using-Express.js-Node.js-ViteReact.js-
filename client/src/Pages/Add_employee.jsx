@@ -81,14 +81,14 @@ function Add_employee() {
             <input
               type="text"
               onChange={(event) => {
-                setIpFirstName(parseInt(event.target.value));
+                setIpFirstName(event.target.value);
               }}
             />
             <label>{colNames[2]}:</label>
             <input
               type="text"
               onChange={(event) => {
-                setIpLastName(parseInt(event.target.value));
+                setIpLastName(event.target.value);
               }}
             />
             <label>{colNames[3]}:</label>
@@ -133,10 +133,10 @@ function Add_employee() {
                 setIpSalary(parseInt(event.target.value));
               }} placeholder="Salary"
             />
-            <button onClick={addEmployee}>Add Drone</button>
+            <button onClick={addEmployee}>Add Employee</button>
           </div>
           <div className="employees">
-            <button onClick={getEmployees}>Show Drones</button>
+            <button onClick={getEmployees}>Show/Refresh Employees</button>
           </div>
       </div>
       <Table list={employees}/>

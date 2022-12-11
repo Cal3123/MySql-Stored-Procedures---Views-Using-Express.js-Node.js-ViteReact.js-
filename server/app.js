@@ -144,7 +144,7 @@ app.post("/add_employee", (req, res) => {
   const ip_employee_experience = parseInt(req.body.ip_employee_experience);
   const ip_salary = parseInt(req.body.ip_salary);
    
-  db.query(`call add_employee(?,?,?,?,?)`,
+  db.query(`call add_employee(?,?,?,?,?, ?, ?, ?, ?)`,
     [ip_username, ip_first_name, ip_last_name, ip_address, ip_birthdate, ip_taxID, ip_hired, ip_employee_experience, ip_salary],
     (err, result) => {
       if (err) {
