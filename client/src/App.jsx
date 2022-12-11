@@ -9,6 +9,25 @@ import Add_owner from './Pages/Add_owner';
 import Add_restaurant from './Pages/Add_restaurant';
 import Add_service from './Pages/Add_service';
 import Add_worker_role from './Pages/Add_worker_role';
+import Display_employee_view from './Pages/Display_employee_view';
+import Display_ingredient_view from './Pages/Display_ingredient_view';
+import Display_location_view from './Pages/Display_location_view';
+import Display_owner_view from './Pages/Display_owner_view';
+import Display_pilot_view from './Pages/Display_pilot_view';
+import Display_service_view from './Pages/Display_service_view';
+import Fire_employee from './Pages/Fire_employee';
+import Fly_drone from './Pages/Fly_drone';
+import Hire_employee from './Pages/Hire_employee';
+import Join_swarm from './Pages/Join_swarm';
+import Leave_swarm from './Pages/Leave_swarm';
+import Load_drone from './Pages/Load_drone';
+import Manage_service from './Pages/Manage_service';
+import Purchase_ingredient from './Pages/Purchase_ingredient';
+import Refuel_drone from './Pages/Refuel_drone';
+import Remove_drone from './Pages/Remove_drone';
+import Remove_ingredient from './Pages/Remove_ingredient';
+import Remove_pilot_role from './Pages/Remove_pilot_role';
+
 import Start_funding from './Pages/Start_funding';
 import Takeover_drone from './Pages/Takeover_drone';
 
