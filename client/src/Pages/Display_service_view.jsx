@@ -20,8 +20,8 @@ function Display_service_view() {
     return (
       <>
         <div className="App">
-          <text >  Display Service View </text>
-          <h1>{notification}</h1>
+          <h1 >  Display Service View </h1>
+          <h2>{notification}</h2>
           <div className="employees">
             <button onClick={getEmployees}>Show Service View</button>
           </div>

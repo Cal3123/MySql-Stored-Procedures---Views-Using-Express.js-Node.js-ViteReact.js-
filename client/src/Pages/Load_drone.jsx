@@ -9,7 +9,7 @@ function Load_drone() {
   const [ip_tag, setTag] = useState(-1);
   const [ip_barcode, setBarcode] = useState("");
   const [packageCount, setPackageCount] = useState(0);
-  const [price, setPrice] = useState(-1);
+  const [price, setPrice] = useState(0);
   const [loads, setLoads] = useState([]);
   const [notification, setNotification] = useState("");
 

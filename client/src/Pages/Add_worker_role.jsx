@@ -2,10 +2,11 @@ import "./App.css";
 import { useState } from "react";
 import Axios from "axios";
 import Table from "../Components/Table/Table"
+import { Employee } from "../Components/Form";
 
 function Add_worker_role() {
     const [ip_username, setIpUsername] = useState("");
-    const colNames = ["Username"];
+    const colNames = ["Employee"];
     const [notification, setNotification] = useState("");
     const [worker_roles, setWorker_roles] = useState([]);
     
@@ -18,7 +19,7 @@ function Add_worker_role() {
               setNotification(res.data.message)
           });
       } else {
-        setNotification("One of your field(s) is empty");
+        setNotification("Please Select an Employee");
       }
   
     };
@@ -38,16 +39,13 @@ function Add_worker_role() {
     return (
       <>
         <div className="App">
-          <text > Worker Roles </text>
-          <h1>{notification}</h1>
+          <h1 >Add  Worker Role </h1>
+          <h2>{notification}</h2>
           <div className="information">
             <label>{colNames[0]}:</label>
-            <input
-              type="text"
-              onChange={(event) => {
+            <Employee name="employee" onChange={(event) => {
                 setIpUsername(event.target.value);
-              }}
-            />
+              }} />
             <button onClick={addWorker_role}>Add Worker Role</button>
           </div>
           <div className="worker_roles">

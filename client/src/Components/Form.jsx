@@ -132,3 +132,45 @@ export function Location(props) {
 
     return <div><select name={props.name} onChange={props.onChange}>{locationOptions}</select></div>;
 }
+
+export function Pilot(props) {
+    const [pilots, setPilots] = useState([]);
+    const getPilots = () => {
+        Axios.get("http://localhost:3001/getPilots").then((response) => {
+            setPilots(response.data);
+        });
+    };
+
+    useEffect(() => {
+        getPilots()
+    }, []);
+
+    const pilotOptions = [];
+    pilotOptions.push(<option key="blank" value=""></option>);
+    for (let i = 0; i < pilots.length; i++) {
+        pilotOptions.push(<option key={pilots[i]['username']} value={pilots[i]['username']}>{pilots[i]['name']} ({pilots[i]['username']})</option>);
+    }
+
+    return <div><select name={props.name} onChange={props.onChange}>{pilotOptions}</select></div>;
+}
+
+export function Employee(props) {
+    const [employees, setEmployees] = useState([]);
+    const getEmployees = () => {
+        Axios.get("http://localhost:3001/getEmployees").then((response) => {
+            setEmployees(response.data);
+        });
+    };
+
+    useEffect(() => {
+        getEmployees()
+    }, []);
+
+    const employeeOptions = [];
+    employeeOptions.push(<option key="blank" value=""></option>);
+    for (let i = 0; i < employees.length; i++) {
+        employeeOptions.push(<option key={employees[i]['username']} value={employees[i]['username']}>{employees[i]['name']} ({employees[i]['username']})</option>);
+    }
+
+    return <div><select name={props.name} onChange={props.onChange}>{employeeOptions}</select></div>;
+}

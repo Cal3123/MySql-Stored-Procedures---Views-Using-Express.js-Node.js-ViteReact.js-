@@ -10,18 +10,18 @@ function Start_funding() {
   const [notification, setNotification] = useState("");
 
   const startFunding = () => {
-
-    if(ip_owner.length > 0 && ip_long_name.length > 0){
-        Axios.post("http://localhost:3001/start_funding", {
-          ip_owner: ip_owner,
-          ip_long_name: ip_long_name
-        }).then((res) => {
-            setNotification(res.data.message)
-        });
+    if (ip_owner.length < 1) {
+      setNotification("Please Select a Valid Owner");
+    } else if (ip_long_name.length < 1) {
+      setNotification("Please Select a Valid Restaurant");
     } else {
-      setNotification("One of your field(s) is empty");
+      Axios.post("http://localhost:3001/start_funding", {
+        ip_owner: ip_owner,
+        ip_long_name: ip_long_name
+      }).then((res) => {
+          setNotification(res.data.message)
+      });
     }
-
   };
 
   const colNames = ["Owner Username", "Restaurant Name"];

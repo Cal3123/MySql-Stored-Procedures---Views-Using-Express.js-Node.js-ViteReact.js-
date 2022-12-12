@@ -5,7 +5,7 @@ import Table from "../Components/Table/Table"
 import { DeliveryService, UsernameSelect } from "../Components/Form"
 
 function Hire_employee() {
-    const [ip_owner, setOwner] = useState("");
+    const [ip_username, setOwner] = useState("");
     const [ip_id, setId] = useState("");
     const [employees, setEmployees] = useState([]);
     const [notification, setNotification] = useState("");
@@ -20,7 +20,7 @@ function Hire_employee() {
         setNotification("Please Choose a Valid Delivery Service");
       } else {
           Axios.post("http://localhost:3001/hire_employee", {
-            ip_owner : ip_owner,
+            ip_owner : ip_username,
             ip_id : ip_id,
           }).then((res) => {
               setNotification(res.data.message)

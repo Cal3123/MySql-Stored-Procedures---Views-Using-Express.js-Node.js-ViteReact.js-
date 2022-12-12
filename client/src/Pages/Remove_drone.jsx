@@ -2,10 +2,11 @@ import "./App.css";
 import { useState } from "react";
 import Axios from "axios";
 import Table from "../Components/Table/Table"
+import { DeliveryService, Drone } from "../Components/Form";
 
 function Remove_drone() {
     const [ip_id, setIpId] = useState("");
-    const [ip_tag, setIpTag] = useState(0);
+    const [ip_tag, setIpTag] = useState(-1);
     const [drones, setDrones] = useState([]);
     const [notification, setNotification] = useState("");
     const colNames = ["ID", "Tag"];
@@ -21,17 +22,18 @@ function Remove_drone() {
       });
     };
     const removeDrone = () => {
-        if(ip_id.length > 0 && ip_tag !== 0 ) {
-            Axios.post("http://localhost:3001/remove_drone" , {
-                ip_id: ip_id,
-                ip_tag: ip_tag,
-            }).then((res) => {
-                setNotification(res.data.message)
-            });      
-        } else {
-            setNotification("One of your field(s) is empty");
-        }
-        
+      if (ip_id.length < 1) {
+        setNotification("Please Select a Valid Delivery Service");
+      } else if (ip_tag < 0) {
+        setNotification("Please Select a Valid Drone");
+      } else {
+        Axios.post("http://localhost:3001/remove_drone" , {
+          ip_id: ip_id,
+          ip_tag: ip_tag,
+      }).then((res) => {
+          setNotification(res.data.message)
+      }); 
+      }
     };
 
  
@@ -40,39 +42,20 @@ function Remove_drone() {
         <div className="App">
           
           <div className="information">
-          <text >  Remove Drone Procedure</text>
-          <h1>{notification}</h1>
+          <h1 >  Remove Drone Procedure</h1>
+          <h2>{notification}</h2>
             <label>{colNames[0]}:</label>
-            <input
-              type="text"
-              onChange={(event) => {
-                setIpId(event.target.value);
-              }}
-            />
+            <DeliveryService name="service" onChange={(event) => {
+                setIpId(event.target.value); setIpTag(-1);
+              }} />
             <label>{colNames[1]}:</label>
-            <input
-              type="number"
-              onChange={(event) => {
-                setIpTag(event.target.value);
-              }}
-            />
+            <Drone did={ip_id} name="drone" onChange={(event) => {
+                setIpTag(parseInt(event.target.value));
+              }} />
             <button onClick={removeDrone}>Remove Drone</button>
           </div>
           <div className="drones">
             <button onClick={getDrones}>Show Drones</button>
-              
-  
-            {/*pilots.map((val, key) => {
-              return (
-                <div className="employee">
-                  <div>
-                    <h3>Username: {val.username}</h3>
-                    <h3>LicenseID: {val.licenseID}</h3>
-                    <h3>PilotExperiencee: {val.experience}</h3>
-                  </div>
-                </div>
-              );
-            })*/}
           </div>
       </div>
       <Table list={drones}/>
