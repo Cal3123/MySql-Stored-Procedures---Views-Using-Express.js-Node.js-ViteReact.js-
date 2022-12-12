@@ -13,7 +13,12 @@ function Remove_ingredient() {
   
     const getIngredients = () => {
       Axios.get("http://localhost:3001/add_ingredient").then((response) => {
-        setIngredients(response.data);
+        if(response.data.message === "Get Error") {
+          setNotification("Get Error")
+        } else {
+          setIngredients(response.data);
+        }
+        
       });
     };
     const removeIngredient = () => {

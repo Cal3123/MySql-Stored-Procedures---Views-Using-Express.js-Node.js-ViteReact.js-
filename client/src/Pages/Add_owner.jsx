@@ -35,10 +35,14 @@ function Add_owner() {
   
     const getOwners = () => {
       Axios.get("http://localhost:3001/add_owner").then((response) => {
-        if(response.message === "Get Error") {
+        if(response.data.message === "Get Error") {
           setNotification("Get Error")
         } else {
-          setOwners(response.data);
+          if(response.data.message === "Get Error") {
+            setNotification("Get Error")
+          } else {
+            setOwners(response.data);
+          } 
         }
         
       });

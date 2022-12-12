@@ -11,7 +11,7 @@ function Add_pilot_role() {
   const [pilots, setPilots] = useState([]);
   const [notification, setNotification] = useState("");
   const addPilot = () => {
-
+ 
     if(ip_username.length > 0 && ip_licenseID.length > 0 && ip_pilot_experience.length > 0 
       && ip_pilot_experience !== 0){
         Axios.post("http://localhost:3001/add_pilot_role", {
@@ -28,9 +28,9 @@ function Add_pilot_role() {
   };
 
   const getPilots = () => {
-    Axios.get("http://localhost:3001/pilot").then((response) => {
+    Axios.get("http://localhost:3001/add_pilot_role").then((response) => {
 
-      if(response.message === "Get Error") {
+      if(response.data.message === "Get Error") {
         setNotification("Get Error")
       } else {
         setPilots(response.data);

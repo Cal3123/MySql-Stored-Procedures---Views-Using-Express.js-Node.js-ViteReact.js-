@@ -32,7 +32,7 @@ function Add_ingredient() {
   
     const getIngredients = () => {
       Axios.get("http://localhost:3001/add_ingredient").then((response) => {
-        if(response.message === "Get Error") {
+        if(response.data.message === "Get Error") {
             setNotification("Get Error")
           } else {
             setIngredients(response.data);

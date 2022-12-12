@@ -49,7 +49,7 @@ const App = () => {
        <Route path='/display_employee_view' element={<Display_employee_view/>}/>
        <Route path='/display_ingredient_view' element={<Display_ingredient_view/>}/> 
        <Route path='/display_location_view' element={<Display_location_view/>}/> 
-       <Route path='/display_owner_view ' element={<Display_owner_view />}/> 
+       <Route path='/display_owner_view' element={<Display_owner_view />}/> 
        <Route path='/display_pilot_view' element={<Display_pilot_view/>}/> 
        <Route path='/display_service_view' element={<Display_service_view/>}/> 
        <Route path='/fire_employee' element={<Fire_employee/>}/> 
