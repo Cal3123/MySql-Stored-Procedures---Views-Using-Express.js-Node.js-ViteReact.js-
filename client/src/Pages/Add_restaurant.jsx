@@ -50,6 +50,7 @@ function Add_restaurant() {
       });
     };
  
+    const TableNames = ["long_name", "rating", "spent", "location", "funded_by"]
     return (
       <>
         <div className="App">
@@ -61,21 +62,21 @@ function Add_restaurant() {
               type="text"
               onChange={(event) => {
                 setLongName(event.target.value);
-              }}
+              }} maxLength="40" minLength="1"
             />
             <label>{colNames[1]}:</label>
             <input
               type="number"
               onChange={(event) => {
                 setRating(event.target.value);
-              }} min="1" max="5"
+              }} min="1" max="5" step="1"
             />
             <label>{colNames[2]}:</label>
             <input
               type="number"
               onChange={(event) => {
                 setSpent(event.target.value);
-              }} min="0"
+              }} min="0" step="1"
             />
             <label>{colNames[3]}:</label>
             <Location name="location" onChange={(event) => {setLocation(event.target.value);}} />
@@ -83,22 +84,9 @@ function Add_restaurant() {
           </div>
           <div className="restaurants">
             <button onClick={getRestaurants}>Show Restaurants</button>
-              
-  
-            {/*pilots.map((val, key) => {
-              return (
-                <div className="employee">
-                  <div>
-                    <h3>Username: {val.username}</h3>
-                    <h3>LicenseID: {val.licenseID}</h3>
-                    <h3>PilotExperiencee: {val.experience}</h3>
-                  </div>
-                </div>
-              );
-            })*/}
           </div>
       </div>
-      <Table list={restaurants}/>
+      <Table list={restaurants} colNames={TableNames}/>
       </>
     );  
   }

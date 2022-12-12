@@ -17,6 +17,7 @@ function Display_location_view() {
       });
     };
  
+    const colNames = ["label", "x_coord", "y_coord", "restaurant count", "delivery service count", "drone count"];
     return (
       <>
         <div className="App">
@@ -26,7 +27,7 @@ function Display_location_view() {
             <button onClick={getEmployees}>Show Location View</button>
           </div>
       </div>
-      <Table list={locationView}/>
+      <Table list={locationView} colNames={colNames} />
       </>
     );  
   }

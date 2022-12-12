@@ -9,11 +9,11 @@ function Remove_ingredient() {
     const [notification, setNotification] = useState("");
     const [ip_barcode, setIpBarcode] = useState("");
     const [ingredients, setIngredients] = useState([]);
-    const colNames = ["Barcode"];
+    const colNames = ["Barcode", "Ingredient Name", "Weight"];
     
   
     const getIngredients = () => {
-      Axios.get("http://localhost:3001/add_ingredient").then((response) => {
+      Axios.get("http://localhost:3001/remove_ingredient").then((response) => {
         if(response.data.message === "Get Error") {
           setNotification("Get Error")
         } else {
@@ -36,7 +36,7 @@ function Remove_ingredient() {
       }
     };
 
- 
+    const TableNames = ["Barcode", "Ingredient Name", "Weight"]
     return (
       <>
         <div className="App">
@@ -55,7 +55,7 @@ function Remove_ingredient() {
               
           </div>
       </div>
-      <Table list={ingredients}/>
+      <Table list={ingredients} colNames={TableNames}/>
       </>
     );  
   }

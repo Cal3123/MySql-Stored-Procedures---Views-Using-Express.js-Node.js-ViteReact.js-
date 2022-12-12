@@ -8,7 +8,9 @@ function Takeover_drone() {
   const [ip_username, setUsername] = useState("");
   const [ip_id, setId] = useState("");
   const [ip_tag, setTag] = useState(-1);
+  const [drones, setDrones] = useState([]);
   const [notification, setNotification] = useState("");
+  const colNames =["Username", "Id", "Tag"]
 
   const takeoverDrone = () => {
     if (ip_username.length < 1) {
@@ -28,7 +30,16 @@ function Takeover_drone() {
     }
   };
 
-  const colNames = ["Pilot Username", "Delivery Service ID", "Drone Tag"];
+  const getDrones = () => {
+    Axios.get("http://localhost:3001/takeover_drone").then((response) => {
+      if(response.data.message === "Get Error") {
+        setNotification("Get Error")
+      } else {
+        setDrones(response.data);
+      }     
+    });
+  };
+  const tableNames = ["id","tag","fuel","capacity","sales","flown_by","swarm_id","swarm_tag","hover"];
  
   return (
     <>
@@ -43,7 +54,10 @@ function Takeover_drone() {
           <label>{colNames[2]}:</label>
           <Drone name="drone" did={ip_id} onChange={(event) => {setTag(event.target.value);}} />
           <button onClick={takeoverDrone}>Takeover Drone</button>
+          <button onClick={ getDrones}>Show Drones</button>
         </div>
+        <Table list={drones} colNames={tableNames}/>
+
     </div>
     </>
   );  

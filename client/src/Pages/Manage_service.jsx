@@ -27,7 +27,7 @@ function Manage_service() {
 
   const getManagers = () => {
     Axios.get("http://localhost:3001/manage_service").then((response) => {
-      if(response.message === "Get Error") {
+      if(response.data.message === "Get Error") {
         setNotification("Get Error")
       } else {
         setServices(response.data);
@@ -37,7 +37,7 @@ function Manage_service() {
   };
 
   const colNames = ["New Manager", "Delivery Service"];
- 
+  const TableNames = ["Delivery Service ID", "Service Name", "Home Base", "Manager"];
   return (
     <>
       <div className="App">
@@ -52,7 +52,7 @@ function Manage_service() {
           <button onClick={getManagers}>View Managers</button>
         </div>
     </div>
-    <Table list={services}/>
+    <Table list={services} colNames={TableNames}/>
     </>
   );  
 }

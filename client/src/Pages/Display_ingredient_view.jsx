@@ -17,6 +17,7 @@ function Display_ingredient_view() {
       });
     };
  
+    const TableNames = ["Ingredient Name", "Location", "Amount Available", "Lowest Price", "Highest Price"]
     return (
       <>
         <div className="App">
@@ -26,7 +27,8 @@ function Display_ingredient_view() {
             <button onClick={getIngredients}>Show Ingredients View</button>
           </div>
       </div>
-      <Table list={ingredientView}/>
+      
+      <Table list={ingredientView} colNames={TableNames}  />
       </>
     );  
   }

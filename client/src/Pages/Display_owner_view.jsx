@@ -17,6 +17,7 @@ function Display_owner_view() {
       });
     };
  
+    const colNames = ["Username", "First Name", "Last Name", "Address", "Restaurant Count", "Place Count", "Rating Highs", "Rating Lows", "Debt"];
     return (
       <>
         <div className="App">
@@ -26,7 +27,7 @@ function Display_owner_view() {
             <button onClick={getEmployees}>Show Owner View</button>
           </div>
       </div>
-      <Table list={ownerView}/>
+      <Table list={ownerView} colNames={colNames}/>
       </>
     );  
   }

@@ -41,6 +41,7 @@ function Fire_employee() {
   
 
  
+    const TableNames = ["Service Name", "Employee Name", "Employee Username", "Service ID"]
     return (
       <>
         <div className="App">
@@ -60,7 +61,7 @@ function Fire_employee() {
             
           </div>
       </div>
-      <Table list={employees}/>
+      <Table list={employees} colNames={TableNames}/>
       </>
     );  
   }

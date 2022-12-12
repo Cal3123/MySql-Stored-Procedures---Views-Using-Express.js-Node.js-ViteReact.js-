@@ -39,7 +39,7 @@ function Add_service() {
   
     const getServices = () => {
       Axios.get("http://localhost:3001/add_service").then((response) => {
-        if(response.message === "Get Error") {
+        if(response.data.message === "Get Error") {
             setNotification("Get Error")
           } else {
             setServices(response.data);
@@ -49,6 +49,7 @@ function Add_service() {
   
 
  
+    const TableNames = ["id", "long_name", "home_base", "manager"]
     return (
       <>
         <div className="App">
@@ -60,14 +61,14 @@ function Add_service() {
               type="text"
               onChange={(event) => {
                 setIpId(event.target.value);
-              }}
+              }} maxLength="40" minLength="1"
             />
             <label>{colNames[1]}:</label>
             <input
               type="text"
               onChange={(event) => {
                 setIpLongname(event.target.value);
-              }}
+              }} minLength="1" maxLength="100"
             />
             <label>{colNames[2]}:</label>
             <Location name="location"  onChange={(event) => {
@@ -83,7 +84,7 @@ function Add_service() {
             <button onClick={getServices}>Show Services</button>
           </div>
       </div>
-      <Table list={services}/>
+      <Table list={services} colNames={TableNames}/>
       </>
     );  
   }

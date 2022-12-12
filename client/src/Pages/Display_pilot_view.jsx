@@ -17,6 +17,7 @@ function Display_pilot_view() {
       });
     };
  
+    const colNames = ["Username", "License ID", "Experience", "Drone Count", "Location Count"];
     return (
       <>
         <div className="App">
@@ -26,7 +27,7 @@ function Display_pilot_view() {
             <button onClick={getEmployees}>Show Location View</button>
           </div>
       </div>
-      <Table list={pilotView}/>
+      <Table list={pilotView} colNames={colNames} />
       </>
     );  
   }

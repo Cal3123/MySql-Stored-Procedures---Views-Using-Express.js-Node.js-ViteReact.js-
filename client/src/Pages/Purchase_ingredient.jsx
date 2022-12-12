@@ -51,6 +51,8 @@ function Purchase_ingredient() {
         
     };
 
+    const TableNames = ["Delivery Service ID", "Drone Tag", "Barcode", "Quantity", "Price"];
+
  
     return (
       <>
@@ -80,7 +82,7 @@ function Purchase_ingredient() {
               type="number"
               onChange={(event) => {
                 setIpQuantity(parseInt(event.target.value));
-              }} min="1"
+              }} min="1" step="1"
             />
             <button onClick={purchase_ingredient}>Purchase Ingredient</button>
           </div>
@@ -101,7 +103,7 @@ function Purchase_ingredient() {
             })*/}
           </div>
       </div>
-      <Table list={ingredients}/>
+      <Table list={ingredients} colNames={TableNames} />
       </>
     );  
   }

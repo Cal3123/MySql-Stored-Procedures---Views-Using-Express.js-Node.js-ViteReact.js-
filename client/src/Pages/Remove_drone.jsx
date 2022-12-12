@@ -12,7 +12,7 @@ function Remove_drone() {
     const colNames = ["ID", "Tag"];
   
     const getDrones = () => {
-      Axios.get("http://localhost:3001/add_drone").then((response) => {
+      Axios.get("http://localhost:3001/remove_drone").then((response) => {
         if(response.data.message === "Get Error") {
             setNotification("Get Error")
           } else {
@@ -37,6 +37,7 @@ function Remove_drone() {
     };
 
  
+    const TableNames = ["id", "tag", "fuel", "capacity", "sales", "flown_by", "swarm_id","swarm_tag", "hover"]
     return (
       <>
         <div className="App">
@@ -58,7 +59,7 @@ function Remove_drone() {
             <button onClick={getDrones}>Show Drones</button>
           </div>
       </div>
-      <Table list={drones}/>
+      <Table list={drones} colNames = {TableNames}/>
       </>
     );  
   }

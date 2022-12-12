@@ -6,7 +6,7 @@ function Table({
   width = "auto",
   height = "auto",
 }) {
-  const row = list.length > 0 ? Object.keys(list[0]) : {};
+  const row = colNames.length > 0 ? colNames: {};
   //console.log(list)
   return (
     <div style={{ width, boxShadow: "px 6px 3px #ccc" }}>
@@ -20,7 +20,7 @@ function Table({
               
               { row.length > 0 &&
               row.map((headerItem, index) => (
-                <th style={{  width: "auto", height: "auto", padding: "5px 10px" }} key={index}> COLUMN {index} </th>
+                <th style={{  width: "auto", height: "auto", padding: "5px 10px" }} key={index}> {headerItem.toUpperCase()}</th>
               ))}
             </tr>
           </thead>

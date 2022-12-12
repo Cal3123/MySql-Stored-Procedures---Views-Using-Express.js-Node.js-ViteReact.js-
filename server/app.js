@@ -146,7 +146,7 @@ app.post("/add_owner", (req, res) => {
 });
 
 app.get("/add_owner", (req, res) => {
-  db.query("SELECT * FROM restaurant_owners", (err, result) => {
+  db.query("SELECT * FROM display_owner_view", (err, result) => {
     if (err) {
       console.log(err);
       res.json({ message: "Get Error" })
@@ -514,7 +514,7 @@ app.post("/fire_employee", (req, res) => {
 });
 
 app.get("/fire_employee", (req, res) => {
-  db.query("SELECT * FROM employees", (err, result) => {
+  db.query("SELECT delivery_services.long_name, concat(users.first_name, ' ', users.last_name) as name, users.username, delivery_services.id FROM work_for, users, delivery_services WHERE work_for.username = users.username and delivery_services.id = work_for.id", (err, result) => {
     if (err) {
       console.log(err);
       res.json({ message: "Get Error" })
@@ -543,7 +543,7 @@ app.post("/manage_service", (req, res) => {
 });
 
 app.get("/manage_service", (req, res) => {
-  db.query("SELECT id, long_name, manager FROM delivery_services", (err, result) => {
+  db.query("SELECT * FROM delivery_services", (err, result) => {
     if (err) {
       console.log(err);
       res.json({ message: "Get Error" })

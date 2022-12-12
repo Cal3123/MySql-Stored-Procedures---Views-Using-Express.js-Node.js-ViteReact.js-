@@ -36,7 +36,7 @@ function Join_swarm() {
   
     const getDrones = () => {
       Axios.get("http://localhost:3001/join_swarm").then((response) => {
-        if(response.message === "Get Error") {
+        if(response.data.message === "Get Error") {
           setNotification("Get Error")
         } else {
           setDrones(response.data);
@@ -47,6 +47,7 @@ function Join_swarm() {
   
 
  
+    const TableNames = ["id", "tag", "fuel", "capacity", "sales", "flown_by", "swarm_id","swarm_tag", "hover"]
     return (
       <>
         <div className="App">
@@ -65,7 +66,7 @@ function Join_swarm() {
             <button onClick={getDrones}>Show Drones</button>
           </div>
       </div>
-      <Table list={drones}/>
+      <Table list={drones} colNames={TableNames}/> 
       </>
     );  
   }

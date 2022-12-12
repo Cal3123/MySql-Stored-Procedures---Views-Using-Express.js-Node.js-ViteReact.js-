@@ -9,6 +9,8 @@ function Start_funding() {
   const [ip_long_name, setRestaurantName] = useState("");
   const [restaurant, setRestaurant] = useState([]);
   const [notification, setNotification] = useState("");
+  const tableNames = ["long_name", "rating", "spent", "location", "funded_by"]
+
 
   const startFunding = () => {
     if (ip_owner.length < 1) {
@@ -51,7 +53,7 @@ function Start_funding() {
           <button onClick={ getRestaurants}>Show Restaurants</button>
         </div>
     </div>
-    <Table list={restaurant}/>
+    <Table list={restaurant} colNames={tableNames}/>
     </>
   );  
 }

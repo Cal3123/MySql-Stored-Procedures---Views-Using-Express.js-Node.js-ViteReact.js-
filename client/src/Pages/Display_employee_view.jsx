@@ -9,7 +9,7 @@ function Display_employee_view() {
     
     const getEmployees = () => {
       Axios.get("http://localhost:3001/display_employee_view").then((response) => {
-        if(response.message === "Get Error") {
+        if(response.data.message === "Get Error") {
           setNotification("Get Error")
         } else {
             setEmployeeView(response.data);
@@ -17,6 +17,7 @@ function Display_employee_view() {
       });
     };
  
+    const colNames = ["username", "taxID", "salary", "hired", "employee_experience", "licenseID", "piloting_experience", "manager_status"];
     return (
       <>
         <div className="App">
@@ -26,7 +27,7 @@ function Display_employee_view() {
             <button onClick={getEmployees}>Show Employees View</button>
           </div>
       </div>
-      <Table list={employeeView}/>
+      <Table list={employeeView} colNames={colNames} />
       </>
     );  
   }

@@ -26,7 +26,7 @@ function Add_worker_role() {
   
     const getWorker_roles = () => {
       Axios.get("http://localhost:3001/add_worker_role").then((response) => {
-        if(response.message === "Get Error") {
+        if(response.data.message === "Get Error") {
             setNotification("Get Error")
           } else {
             setWorker_roles(response.data);
@@ -36,6 +36,7 @@ function Add_worker_role() {
   
 
  
+    const TableNames = ["username"]
     return (
       <>
         <div className="App">
@@ -52,7 +53,7 @@ function Add_worker_role() {
             <button onClick={getWorker_roles}>Show Worker Roles</button>
           </div>
       </div>
-      <Table list={worker_roles}/>
+      <Table list={worker_roles} colNames={TableNames}/>
       </>
     );  
   }

@@ -34,7 +34,7 @@ function Fly_drone() {
   
     const getDrones = () => {
       Axios.get("http://localhost:3001/fly_drone").then((response) => {
-        if(response.message === "Get Error") {
+        if(response.data.message === "Get Error") {
           setNotification("Get Error")
         } else {
           setDrones(response.data);
@@ -45,6 +45,7 @@ function Fly_drone() {
   
 
  
+    const TableNames = ["id", "tag", "fuel", "capacity", "sales", "flown_by", "swarm_id","swarm_tag", "hover"]
     return (
       <>
         <div className="App">
@@ -65,22 +66,9 @@ function Fly_drone() {
           </div>
           <div className="drones">
             <button onClick={getDrones}>Show Drones</button>
-              
-  
-            {/*pilots.map((val, key) => {
-              return (
-                <div className="employee">
-                  <div>
-                    <h3>Username: {val.username}</h3>
-                    <h3>LicenseID: {val.licenseID}</h3>
-                    <h3>PilotExperiencee: {val.experience}</h3>
-                  </div>
-                </div>
-              );
-            })*/}
           </div>
       </div>
-      <Table list={drones}/>
+      <Table list={drones} colNames={TableNames}/>
       </>
     );  
 }

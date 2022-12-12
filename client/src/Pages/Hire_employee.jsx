@@ -31,7 +31,7 @@ function Hire_employee() {
   
     const getEmployees = () => {
       Axios.get("http://localhost:3001/hire_employee").then((response) => {
-        if(response.message === "Get Error") {
+        if(response.data.message === "Get Error") {
           setNotification("Get Error")
         } else {
           setEmployees(response.data);
@@ -41,7 +41,8 @@ function Hire_employee() {
     };
   
 
- 
+    const TableNames =["username", "id", "name", "long_name"]
+
     return (
       <>
         <div className="App">
@@ -58,7 +59,7 @@ function Hire_employee() {
             <button onClick={getEmployees}>Show Employees</button>
           </div>
       </div>
-      <Table list={employees} />
+      <Table list={employees} colNames={TableNames}/>
       </>
     );  
   }
