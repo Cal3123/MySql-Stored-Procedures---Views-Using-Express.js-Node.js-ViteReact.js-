@@ -7,6 +7,7 @@ import { RestaurantSelect, UsernameSelect } from "../Components/Form";
 function Start_funding() {
   const [ip_owner, setOwner] = useState("");
   const [ip_long_name, setRestaurantName] = useState("");
+  const [restaurant, setRestaurant] = useState([]);
   const [notification, setNotification] = useState("");
 
   const startFunding = () => {
@@ -24,6 +25,16 @@ function Start_funding() {
     }
   };
 
+  const getRestaurants = () => {
+    Axios.get("http://localhost:3001/start_funding").then((response) => {
+      if(response.data.message === "Get Error") {
+        setNotification("Get Error")
+      } else {
+        setRestaurant(response.data);
+      }     
+    });
+  };
+
   const colNames = ["Owner Username", "Restaurant Name"];
  
   return (
@@ -37,8 +48,10 @@ function Start_funding() {
           <label>{colNames[1]}:</label>
           <RestaurantSelect name="restaurant" onChange={(event) => {setRestaurantName(event.target.value);}} />
           <button onClick={startFunding}>Start Funding</button>
+          <button onClick={ getRestaurants}>Show Restaurants</button>
         </div>
     </div>
+    <Table list={restaurant}/>
     </>
   );  
 }

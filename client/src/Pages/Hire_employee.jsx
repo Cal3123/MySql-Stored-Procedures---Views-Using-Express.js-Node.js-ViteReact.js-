@@ -9,7 +9,7 @@ function Hire_employee() {
     const [ip_id, setId] = useState("");
     const [employees, setEmployees] = useState([]);
     const [notification, setNotification] = useState("");
-    const colNames = ["Username", "Delivery Service"];
+    const colNames = ["Username", "Id"];
 
 
     
@@ -45,7 +45,7 @@ function Hire_employee() {
     return (
       <>
         <div className="App">
-          <h1>Add Employee Procedure </h1>
+          <h1>Hire Employee Procedure </h1>
           <h2>{notification}</h2>
           <div className="information">
             <label>{colNames[0]}:</label>

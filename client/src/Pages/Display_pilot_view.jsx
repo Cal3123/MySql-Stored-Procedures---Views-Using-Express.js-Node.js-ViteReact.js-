@@ -7,7 +7,7 @@ function Display_pilot_view() {
     const [pilotView, sePilotView] = useState([]);
     const [notification, setNotification] = useState("");
     
-    const getEmployees = () => {
+    const getPilots = () => {
       Axios.get("http://localhost:3001/display_pilot_view").then((response) => {
         if(response.data.message === "Get Error") {
           setNotification("Get Error")
@@ -20,10 +20,10 @@ function Display_pilot_view() {
     return (
       <>
         <div className="App">
-          <h1 >  Display Location View </h1>
+          <h1 >  Display Pilot View </h1>
           <h2>{notification}</h2>
           <div className="employees">
-            <button onClick={getEmployees}>Show Location View</button>
+            <button onClick={getPilots}>Show Pilots</button>
           </div>
       </div>
       <Table list={pilotView}/>
