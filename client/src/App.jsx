@@ -3,7 +3,7 @@ import Add_pilot_role from "./Pages/Add_pilot_role"
 import Home_Page from './Pages/Home_Page';
 import Add_drone from './Pages/Add_drone'
 import Add_employee from './Pages/Add_employee'
-import Add_ingredient from './Pages/Remove_pilot_role';
+import Add_ingredient from './Pages/Add_ingredient';
 import Add_location from './Pages/Add_location';
 import Add_owner from './Pages/Add_owner';
 import Add_restaurant from './Pages/Add_restaurant';

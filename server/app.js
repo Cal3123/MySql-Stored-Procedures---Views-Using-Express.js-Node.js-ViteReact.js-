@@ -149,9 +149,9 @@ app.post("/add_employee", (req, res) => {
     (err, result) => {
       if (err) {
         console.log(err);
-        res.send("Error detected")
+        res.json({message: "Error detected"});
       } else {
-        res.send("Request Sent to Server");
+        res.json({message: "Request Sent to Server"});
       }
     }
   );
@@ -261,7 +261,7 @@ app.get("/add_ingredient", (req, res) => {
 
 app.post("/add_drone", (req, res) => {
   const ip_id = req.body.ip_id;
-  const ip_tag = req.body.ip_tag;
+  const ip_tag = parseInt(req.body.ip_tag);
   const ip_fuel = parseInt(req.body.ip_fuel);
   const ip_capacity = parseInt(req.body.ip_capacity);
   const ip_sales = parseInt(req.body.ip_sales);
@@ -848,7 +848,9 @@ app.get("/display_employee_view", (req, res) => {
       console.log(err);
       res.json({ message: "Get Error" })
       //res.send("Error detected")
-    }  
+    }  else {
+      res.json(result);
+    }
   });
 });
 

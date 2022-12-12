@@ -9,30 +9,32 @@ function Add_ingredient() {
     const [ip_weight, setIpWeight] = useState(0);
     const [notification, setNotification] = useState("");
     const [ingredients, setIngredients] = useState([]);
-    const colNames = ["Barcode", "Iname", "Weight"];
+    const colNames = ["Barcode", "Ingredient Name", "Weight"];
 
 
 
     
     const addIngredient = () => {
-  
-      if(ip_barcode.length > 0 && ip_iname !== 0 && ip_weight !== 0){
-          Axios.post("http://localhost:3001/add_ingredient", {
-            ip_barcode : ip_barcode,
-            ip_iname : ip_iname,
-            ip_weight : ip_weight,
-          }).then((res) => {
-              setNotification(res.data.message)
-          });
+      if (ip_barcode.length < 1) {
+        setNotification("Please Specify a Barcode");
+      } else if (ip_iname.length < 1) {
+        setNotification("Please Specify an Ingredient Name");
+      } else if (ip_weight < 1) {
+        setNotification("Ingredients Must Have Weight");
       } else {
-        setNotification("One of your field(s) is empty");
+        Axios.post("http://localhost:3001/add_ingredient", {
+          ip_barcode : ip_barcode,
+          ip_iname : ip_iname,
+          ip_weight : ip_weight
+        }).then((res) => {
+            setNotification(res.data.message)
+        });
       }
-  
     };
   
     const getIngredients = () => {
       Axios.get("http://localhost:3001/add_ingredient").then((response) => {
-        if(response.message === "Get Error") {
+        if(response.data.message === "Get Error") {
             setNotification("Get Error")
           } else {
             setIngredients(response.data);
@@ -45,8 +47,8 @@ function Add_ingredient() {
     return (
       <>
         <div className="App">
-          <text > Ingredients </text>
-          <h1>{notification}</h1>
+          <h1 > Ingredients </h1>
+          <h2>{notification}</h2>
           <div className="information">
             <label>{colNames[0]}:</label>
             <input
@@ -73,19 +75,6 @@ function Add_ingredient() {
           </div>
           <div className="ingredients">
             <button onClick={getIngredients}>Show Ingredients</button>
-              
-  
-            {/*pilots.map((val, key) => {
-              return (
-                <div className="employee">
-                  <div>
-                    <h3>Username: {val.username}</h3>
-                    <h3>LicenseID: {val.licenseID}</h3>
-                    <h3>PilotExperiencee: {val.experience}</h3>
-                  </div>
-                </div>
-              );
-            })*/}
           </div>
       </div>
       <Table list={ingredients}/>
