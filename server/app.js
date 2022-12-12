@@ -141,11 +141,11 @@ app.post("/add_owner", (req, res) => {
   const ip_username = req.body.ip_username;
   const ip_first_name = req.body.ip_first_name;
   const ip_last_name = req.body.ip_last_name;
-  const ip_address = req.body.ip_address;
+  const ip_address = req.body.ip_address; //might need ip_ip.address
   const ip_birthdate = Date.parse(req.body.ip_birthdate); /** @TODO ERROR. NEEDS NORMALIZATION i saw this example online:const d = new Date("2022-03-25");*/
    
   db.query(`call add_owner(?,?,?,?,?)`,
-    [ip_username, ip_first_name, ip_last_name, ip_address, ip_birthdate],
+    [ip_username, ip_first_name, ip_last_name, ip_address, ip_birthdate], //also ip_ip.address maybe
     (err, result) => {
       if (err) {
         console.log(err);
@@ -174,15 +174,15 @@ app.post("/add_employee", (req, res) => {
   const ip_first_name = req.body.ip_first_name;
   const ip_last_name = req.body.ip_last_name;
   const ip_address = req.body.ip_address;
-  const ip_birthdate = Date.parse(body.ip_birthdate); /** @TODO FIX */
+  const ip_birthdate = req.body.ip_birthdate; /** @TODO FIX */
   const ip_taxID = req.body.ip_taxID;
-  const ip_hired = Date.parse(body.ip_hired);
+  const ip_hired = req.body.ip_hired;
   const ip_employee_experience = parseInt(req.body.ip_employee_experience);
   const ip_salary = parseInt(req.body.ip_salary);
    
-  db.query(`call add_employee(?,?,?,?,?,?,?,?,?)`,
+  db.query(`call add_employee(?,?,?,?,?, ?, ?, ?, ?)`,
     [ip_username, ip_first_name, ip_last_name, ip_address, ip_birthdate, ip_taxID, ip_hired, ip_employee_experience, ip_salary],
-    (err, result) => { 
+    (err, result) => {
       if (err) {
         console.log(err);
         res.json({message: "Error detected"});
@@ -224,7 +224,7 @@ app.post("/add_pilot_role", (req, res) => {
   );
 });
 
-app.get("/add_pilot_role", (req, res) => {
+app.get("/pilot", (req, res) => {
   db.query("SELECT * FROM pilots", (err, result) => {
     if (err) {
       console.log(err);
@@ -297,7 +297,7 @@ app.get("/add_ingredient", (req, res) => {
 
 app.post("/add_drone", (req, res) => {
   const ip_id = req.body.ip_id;
-  const ip_tag = parseInt(req.body.ip_tag);
+  const ip_tag = req.body.ip_tag;
   const ip_fuel = parseInt(req.body.ip_fuel);
   const ip_capacity = parseInt(req.body.ip_capacity);
   const ip_sales = parseInt(req.body.ip_sales);
@@ -691,7 +691,7 @@ app.post("/refuel_drone", (req, res) => {
   const ip_tag = parseInt(req.body.ip_tag);
   const ip_more_fuel = parseInt(req.body.ip_more_fuel);
 
-  db.query(`call refuel_drone(?,?,?,?)`, [ip_id, ip_tag, ip_more_fuel],
+  db.query(`call refuel_drone(?,?,?)`, [ip_id, ip_tag, ip_more_fuel],
     (err, result) => {
       if (err) {
         console.log(err);
@@ -753,7 +753,7 @@ app.post("/purchase_ingredient", (req, res) => {
   const ip_barcode = req.body.ip_barcode;
   const ip_quantity  = parseInt(req.body.ip_quantity);
 
-  db.query(`call purchase_ingredient(?,?,?,?)`, [ip_long_name, ip_id, ip_tag, ip_barcode, ip_quantity],
+  db.query(`call purchase_ingredient(?,?,?,?, ?)`, [ip_long_name, ip_id, ip_tag, ip_barcode, ip_quantity],
     (err, result) => {
       if (err) {
         console.log(err);

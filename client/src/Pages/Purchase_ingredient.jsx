@@ -2,18 +2,19 @@ import "./App.css";
 import { useState } from "react";
 import Axios from "axios";
 import Table from "../Components/Table/Table"
+import { DeliveryService, Drone, Ingredient, RestaurantSelect } from "../Components/Form";
 
 function Purchase_ingredient() {
     
     const [ip_long_name, setIpLongName] = useState("");
     const [ip_id, setIpId] = useState("");
-    const [ip_tag, setIpTag] = useState(0);
+    const [ip_tag, setIpTag] = useState(-1);
     
     const [ip_barcode, setIpBarcode] = useState("");
-    const [ip_quantity, setIpQuantity] = useState("");
+    const [ip_quantity, setIpQuantity] = useState(0);
     const [notification, setNotification] = useState("");
     const [ingredients, setIngredients] = useState([]);
-    const colNames = ["ID", "Tag", "More Fuel"];
+    const colNames = ["Restaurant", "Delivery Service", "Drone Tag", "Ingredient", "Quantity"];
   
     const getIngredients = () => {
       Axios.get("http://localhost:3001/purchase_ingredient").then((response) => {
@@ -26,18 +27,26 @@ function Purchase_ingredient() {
       });
     };
     const purchase_ingredient = () => {
-        if(ip_long_name.length > 0 && ip_id.length > 0 && ip_tag !== 0 && ip_barcode.length > 0 && ip_quantity !==0) {
-            Axios.post("http://localhost:3001/purchase_ingredient" , {
-                ip_long_name : ip_long_name,
-                ip_id: ip_id,
-                ip_tag: ip_tag,
-                ip_barcode: ip_barcode,
-                ip_quantity : ip_quantity
-            }).then((res) => {
-                setNotification(res.data.message)
-            });      
+        if (ip_long_name.length < 1) {
+          setNotification("Please Select a Restaurant");
+        } else if (ip_id.length < 1) {
+          setNotification("Please Select a Delivery Service");
+        } else if (ip_tag < 0) {
+          setNotification("Please Select a Drone");
+        } else if (ip_barcode.length < 1) {
+          setNotification("Please Select an Ingredient");
+        } else if (ip_quantity < 1) {
+          setNotification("You Must Purchase At Least 1 of The Item");
         } else {
-            setNotification("One of your field(s) is empty");
+          Axios.post("http://localhost:3001/purchase_ingredient" , {
+            ip_long_name : ip_long_name,
+            ip_id: ip_id,
+            ip_tag: ip_tag,
+            ip_barcode: ip_barcode,
+            ip_quantity : ip_quantity
+        }).then((res) => {
+            setNotification(res.data.message)
+        }); 
         }
         
     };
@@ -48,42 +57,30 @@ function Purchase_ingredient() {
         <div className="App">
           
           <div className="information">
-          <text >  Purchase Ingredient Procedure</text>
-          <h1>{notification}</h1>
+          <h1 >  Purchase Ingredient Procedure</h1>
+          <h2>{notification}</h2>
             <label>{colNames[0]}:</label>
-            <input
-              type="text"
-              onChange={(event) => {
+            <RestaurantSelect name="restaurant" onChange={(event) => {
                 setIpLongName(event.target.value);
-              }}
-            />
+              }} />
             <label>{colNames[1]}:</label>
-            <input
-              type="text"
-              onChange={(event) => {
+            <DeliveryService name="service" onChange={(event) => {
                 setIpId(event.target.value);
-              }}
-            />
+              }} />
             <label>{colNames[2]}:</label>
-            <input
-              type="number"
-              onChange={(event) => {
-                setIpTag(event.target.value);
-              }}
-            />
+            <Drone did={ip_id} name="drone" onChange={(event) => {
+                setIpTag(parseInt(event.target.value));
+              }} />
             <label>{colNames[3]}:</label>
-            <input
-              type="text"
-              onChange={(event) => {
+            <Ingredient name="ingredient" onChange={(event) => {
                 setIpBarcode(event.target.value);
-              }}
-            />
+              }} />
             <label>{colNames[4]}:</label>
             <input
               type="number"
               onChange={(event) => {
-                setIpQuantity(event.target.value);
-              }}
+                setIpQuantity(parseInt(event.target.value));
+              }} min="1"
             />
             <button onClick={purchase_ingredient}>Purchase Ingredient</button>
           </div>
