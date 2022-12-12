@@ -58,7 +58,7 @@ function Add_employee() {
   
     const getEmployees = () => {
       Axios.get("http://localhost:3001/add_employee").then((response) => {
-        if(response.message === "Get Error") {
+        if(response.data.message === "Get Error") {
           setNotification("Get Error")
         } else {
           setEmployees(response.data);
@@ -72,9 +72,10 @@ function Add_employee() {
     return (
       <>
         <div className="App">
+
+          <div className="information">
           <h1 >  Add Employee Procedure </h1>
           <h2>{notification}</h2>
-          <div className="information">
             <label>{colNames[0]}:</label>
             <input type="text" onChange={(event) => {setIpUsername(event.target.value);}} />
             <label>{colNames[1]}:</label>

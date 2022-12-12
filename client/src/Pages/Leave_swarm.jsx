@@ -27,7 +27,7 @@ function Leave_swarm() {
 
   const getDrones = () => {
     Axios.get("http://localhost:3001/leave_swarm").then((response) => {
-      if(response.message === "Get Error") {
+      if(response.data.message === "Get Error") {
         setNotification("Get Error")
       } else {
         setDrones(response.data);

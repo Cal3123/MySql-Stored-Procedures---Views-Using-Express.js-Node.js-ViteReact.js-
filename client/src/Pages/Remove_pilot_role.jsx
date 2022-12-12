@@ -14,7 +14,12 @@ function Remove_pilot_role() {
   
     const getPilot_roles = () => {
       Axios.get("http://localhost:3001/add_pilot_role").then((response) => {
-        setPilots(response.data);
+        if(response.data.message === "Get Error") {
+          setNotification("Get Error")
+        } else {
+          setPilots(response.data);
+        }
+        
       });
     };
     const removePilot_role = () => {

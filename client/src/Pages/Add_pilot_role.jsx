@@ -30,9 +30,9 @@ function Add_pilot_role() {
   };
 
   const getPilots = () => {
-    Axios.get("http://localhost:3001/pilot").then((response) => {
+    Axios.get("http://localhost:3001/add_pilot_role").then((response) => {
 
-      if(response.message === "Get Error") {
+      if(response.data.message === "Get Error") {
         setNotification("Get Error")
       } else {
         setPilots(response.data);

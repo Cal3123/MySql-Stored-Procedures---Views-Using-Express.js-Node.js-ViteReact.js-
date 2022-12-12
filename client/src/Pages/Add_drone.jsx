@@ -47,7 +47,8 @@ function Add_drone() {
   
     const getDrones = () => {
       Axios.get("http://localhost:3001/add_drone").then((response) => {
-        if(response.message === "Get Error") {
+        console.log(response)
+        if(response.data.message === "Get Error") {
           setNotification("Get Error")
         } else {
           setDrones(response.data);
@@ -97,8 +98,6 @@ function Add_drone() {
             <label>{colNames[5]}:</label>
             <UsernameSelect name="flown_by" onChange={(event) => {setIpFlownBy(event.target.value);}} />
             <button onClick={addDrone}>Add Drone</button>
-          </div>
-          <div >
             <button onClick={getDrones}>Show Drones</button>
           </div>
       </div>

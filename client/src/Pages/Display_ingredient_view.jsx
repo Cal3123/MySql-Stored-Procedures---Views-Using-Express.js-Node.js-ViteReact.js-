@@ -9,7 +9,7 @@ function Display_ingredient_view() {
     
     const getIngredients = () => {
       Axios.get("http://localhost:3001/display_ingredient_view").then((response) => {
-        if(response.message === "Get Error") {
+        if(response.data.message === "Get Error") {
           setNotification("Get Error")
         } else {
             setIngredientView(response.data);

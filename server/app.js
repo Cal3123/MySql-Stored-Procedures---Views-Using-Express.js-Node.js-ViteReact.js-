@@ -15,88 +15,100 @@ const db = mysql.createConnection({
   database: process.env.DATABASE_NAME
 });
 
-/** START GET FOR INPUTS */
+/** START GET FOR INPUTS*/  
 app.get("/getUsernames", (req, res) => {
   db.query("SELECT username, concat(first_name, ' ', last_name, ' (', username, ')') as name FROM users", (err, result) => {
     if (err) {
+      console.log(err)
       res.header('Access-Control-Allow-Origin', '*');
-      res.json({ message: "Get Error" });
-    }  
+      res.json({ message: "Get Usernames Error" });
+    } else {
 
     const usernames = [];
     for (let i = 0; i < result.length; i++) {
       usernames.push({'username': result[i]["username"], 'name': result[i]["name"]});
     }
     res.header('Access-Control-Allow-Origin', '*');
-    res.json(usernames);
+    res.json(usernames); 
+  }
   });
 });
 
 app.get("/getRestaurants", (req, res) => {
   db.query("SELECT long_name FROM restaurants", (err, result) => {
     if (err) {
+      console.log(err)
       res.header('Access-Control-Allow-Origin', '*');
-      res.json({ message: "Get Error" });
-    }  
+      res.json({ message: "Get Restaurants Error" });
+    } else {  
 
     const restaurants = [];
     for (let i = 0; i < result.length; i++) {
       restaurants.push(result[i]["long_name"]);
     }
-    res.header('Access-Control-Allow-Origin', '*');
-    res.json(restaurants);
+      res.header('Access-Control-Allow-Origin', '*');
+      res.json(restaurants);
+    }
   });
 });
 
 app.get("/getServices", (req, res) => {
   db.query("SELECT id, long_name FROM delivery_services", (err, result) => {
     if (err) {
+      console.log(err)
       res.header('Access-Control-Allow-Origin', '*');
-      res.json({ message: "Get Error" });
-    }  
+      res.json({ message: "Get getServices Error" });
+    } else {  
 
     const services = [];
     for (let i = 0; i < result.length; i++) {
       services.push({'id': result[i]["id"], 'long_name': result[i]["long_name"]});
     }
-    res.header('Access-Control-Allow-Origin', '*');
-    res.json(services);
+      res.header('Access-Control-Allow-Origin', '*');
+      res.json(services);
+    }
   });
 });
 
 app.post("/getDronesById", (req, res) => {
   db.query("SELECT * FROM drones WHERE id = ?", [req.body.ip_id], (err, result) => {
     if (err) {
+      console.log(err)
       res.header('Access-Control-Allow-Origin', '*');
-      res.json({ message: "Get Error" });
-    }  
+      res.json({ message: "Get getDronesById Error" });
+    } else {   
 
-    res.header('Access-Control-Allow-Origin', '*');
-    res.json(result);
+      res.header('Access-Control-Allow-Origin', '*');
+      res.json(result);
+    }
   });
 });
 
 app.get("/getIngredients", (req, res) => {
   db.query("SELECT * FROM ingredients", (err, result) => {
     if (err) {
+      console.log(err)
       res.header('Access-Control-Allow-Origin', '*');
-      res.json({ message: "Get Error" });
-    }  
+      res.json({ message: "Get getIngredients Error" });
+    } else {   
 
-    res.header('Access-Control-Allow-Origin', '*');
-    res.json(result);
+      res.header('Access-Control-Allow-Origin', '*');
+      res.json(result);
+    }
   });
 });
 
 app.get("/getLocations", (req, res) => {
   db.query("SELECT * FROM locations", (err, result) => {
     if (err) {
+      console.log(err)
       res.header('Access-Control-Allow-Origin', '*');
-      res.json({ message: "Get Error" });
-    }  
+      res.json({ message: "Get getLocations Error" });
+    } else {    
 
-    res.header('Access-Control-Allow-Origin', '*');
-    res.json(result);
+      res.header('Access-Control-Allow-Origin', '*');
+      res.json(result);
+    }
   });
 });
 
@@ -129,11 +141,11 @@ app.post("/add_owner", (req, res) => {
   const ip_username = req.body.ip_username;
   const ip_first_name = req.body.ip_first_name;
   const ip_last_name = req.body.ip_last_name;
-  const ip_address = req.body.ip_address;
-  const ip_birthdate = req.body.ip_birthdate; /** @TODO ERROR. NEEDS NORMALIZATION */
+  const ip_address = req.body.ip_address; //might need ip_ip.address
+  const ip_birthdate = Date.parse(req.body.ip_birthdate); /** @TODO ERROR. NEEDS NORMALIZATION i saw this example online:const d = new Date("2022-03-25");*/
    
   db.query(`call add_owner(?,?,?,?,?)`,
-    [ip_username, ip_first_name, ip_last_name, ip_address, ip_birthdate],
+    [ip_username, ip_first_name, ip_last_name, ip_address, ip_birthdate], //also ip_ip.address maybe
     (err, result) => {
       if (err) {
         console.log(err);

@@ -13,7 +13,7 @@ function Remove_drone() {
   
     const getDrones = () => {
       Axios.get("http://localhost:3001/add_drone").then((response) => {
-        if(response.message === "Get Error") {
+        if(response.data.message === "Get Error") {
             setNotification("Get Error")
           } else {
             setDrones(response.data);

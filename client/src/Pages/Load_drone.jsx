@@ -39,7 +39,7 @@ function Load_drone() {
 
   const getLoads = () => {
     Axios.get("http://localhost:3001/load_drone").then((response) => {
-      if(response.message === "Get Error") {
+      if(response.data.message === "Get Error") {
         setNotification("Get Error")
       } else {
         setLoads(response.data);

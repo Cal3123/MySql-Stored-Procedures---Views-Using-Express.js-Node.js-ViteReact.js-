@@ -31,7 +31,7 @@ function Hire_employee() {
   
     const getEmployees = () => {
       Axios.get("http://localhost:3001/hire_employee").then((response) => {
-        if(response.message === "Get Error") {
+        if(response.data.message === "Get Error") {
           setNotification("Get Error")
         } else {
           setEmployees(response.data);

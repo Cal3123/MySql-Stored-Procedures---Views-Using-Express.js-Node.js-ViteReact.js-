@@ -5,8 +5,8 @@ import Table from "../Components/Table/Table"
 
 function Add_location() {
     const [ip_label, setIpLabel] = useState("");
-    const [ip_xcoord, setIpXCoord] = useState(null);
-    const [ip_ycoord, setIpYCoord] = useState(null);
+    const [ip_xcoord, setIpXCoord] = useState(0);
+    const [ip_ycoord, setIpYCoord] = useState(0);
     const [ip_space, setIpSpace] = useState(0);
     const [locations, setLocations] = useState([]);
     const [notification, setNotification] = useState("");
@@ -15,29 +15,25 @@ function Add_location() {
 
     
     const addLocation = () => {
-      if (ip_label.length < 1) {
-        setNotification("Please Specify a Location Label");
-      } else if (ip_xcoord === null) {
-        setNotification("Please Specify an X Coordinate");
-      } else if (ip_ycoord === null) {
-        setNotification("Please Specify a Y Coordinate");
-      } else if (ip_space < 1) {
-        setNotification("Locations Must Have At Least 1 Drone Capacity");
+  
+      if(ip_label.length > 0 && ip_xcoord !== null && ip_ycoord !== null && ip_space !== 0){
+          Axios.post("http://localhost:3001/add_location", {
+            ip_label : ip_label,
+            ip_xcoord : ip_xcoord,
+            ip_ycoord : ip_ycoord,
+            ip_space : ip_space,
+          }).then((res) => {
+              setNotification(res.data.message)
+          });
       } else {
-        Axios.post("http://localhost:3001/add_location", {
-          ip_label : ip_label,
-          ip_x_coord : ip_xcoord,
-          ip_y_coord : ip_ycoord,
-          ip_space : ip_space,
-        }).then((res) => {
-            setNotification(res.data.message)
-        });
+        setNotification("One of your field(s) is empty");
       }
+  
     };
   
     const getLocations = () => {
         Axios.get("http://localhost:3001/add_location").then((response) => {
-            if(response.message === "Get Error") {
+            if(response.data.message === "Get Error") {
                 setNotification("Get Error")
             } else {
                 setLocations(response.data);
@@ -51,8 +47,8 @@ function Add_location() {
         <div className="App">
           
           <div className="information">
-          <h1 >  Add Location Procedure</h1>
-          <h2>{notification}</h2>
+          <text >  Add Location Procedure</text>
+          <h1>{notification}</h1>
             <label>{colNames[0]}:</label>
             <input
               type="text"
@@ -64,28 +60,27 @@ function Add_location() {
             <input
               type="number"
               onChange={(event) => {
-                setIpXCoord(parseInt(event.target.value));
+                setIpXCoord(event.target.value);
               }}
             />
             <label>{colNames[2]}:</label>
             <input
               type="number"
               onChange={(event) => {
-                setIpYCoord(parseInt(event.target.value));
+                setIpYCoord(event.target.value);
               }}
             />
             <label>{colNames[3]}:</label>
             <input
               type="number"
               onChange={(event) => {
-                setIpSpace(parseInt(event.target.value));
+                setIpSpace(event.target.value);
               }}
-              min="0"
             />
             <button onClick={addLocation}>Add Location</button>
           </div>
           <div className="locations">
-            <button onClick={getLocations}>Show/Refresh Locations</button>
+            <button onClick={getLocations}>Show Locations</button>
               
   
             {/*pilots.map((val, key) => {

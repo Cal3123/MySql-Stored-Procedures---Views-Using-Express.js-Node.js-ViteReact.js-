@@ -41,7 +41,7 @@ function Add_restaurant() {
   
     const getRestaurants = () => {
       Axios.get("http://localhost:3001/add_restaurant").then((response) => {
-        if(response.message === "Get Error") {
+        if(response.data.message === "Get Error") {
           setNotification("Get Error")
         } else {
           setRestaurants(response.data);
