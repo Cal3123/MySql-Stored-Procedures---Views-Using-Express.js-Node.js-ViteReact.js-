@@ -885,6 +885,8 @@ app.get("/display_employee_view", (req, res) => {
       res.json({ message: "Get Error" })
       //res.send("Error detected")
     }  
+    console.log(result);
+    res.json(result);
   });
 });
 
