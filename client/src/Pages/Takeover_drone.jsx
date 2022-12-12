@@ -19,8 +19,8 @@ function Takeover_drone() {
       setNotification("Please Select a Valid Drone");
     } else {
       Axios.post("http://localhost:3001/takeover_drone", {
-        ip_username: ip_owner,
-        ip_id: ip_long_name,
+        ip_username: ip_username,
+        ip_id: ip_id,
         ip_tag: ip_tag
       }).then((res) => {
           setNotification(res.data.message)

@@ -20,8 +20,8 @@ function Display_employee_view() {
     return (
       <>
         <div className="App">
-          <text >  Display Employee View </text>
-          <h1>{notification}</h1>
+          <h1 >  Display Employee View </h1>
+          <h2>{notification}</h2>
           <div className="employees">
             <button onClick={getEmployees}>Show Employees View</button>
           </div>

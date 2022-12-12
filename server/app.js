@@ -111,6 +111,30 @@ app.get("/getLocations", (req, res) => {
     }
   });
 });
+
+app.get("/getPilots", (req, res) => {
+  db.query("SELECT users.username, concat(first_name, ' ', last_name, ' (', users.username, ')') as name FROM pilots inner join users on users.username = pilots.username", (err, result) => {
+    if (err) {
+      res.header('Access-Control-Allow-Origin', '*');
+      res.json({ message: "Get Error" });
+    }  
+
+    res.header('Access-Control-Allow-Origin', '*');
+    res.json(result);
+  });
+});
+
+app.get("/getEmployees", (req, res) => {
+  db.query("SELECT users.username, concat(first_name, ' ', last_name) as name FROM employees inner join users on users.username = employees.username", (err, result) => {
+    if (err) {
+      res.header('Access-Control-Allow-Origin', '*');
+      res.json({ message: "Get Error" });
+    }  
+
+    res.header('Access-Control-Allow-Origin', '*');
+    res.json(result);
+  });
+});
 /** END GET FOR INPUTS */
 
 app.post("/add_owner", (req, res) => {
@@ -125,9 +149,9 @@ app.post("/add_owner", (req, res) => {
     (err, result) => {
       if (err) {
         console.log(err);
-        res.send("Error detected")
+        res.json({message: "Error detected"});
       } else {
-        res.send("Request Sent to Server");
+        res.json({message: "Request Sent to Server"});
       }
     }
   );
@@ -161,9 +185,9 @@ app.post("/add_employee", (req, res) => {
     (err, result) => { 
       if (err) {
         console.log(err);
-        res.send("Error detected")
+        res.json({message: "Error detected"});
       } else {
-        res.send("Request Sent to Server");
+        res.json({message: "Request Sent to Server"});
       }
     }
   );
@@ -546,7 +570,7 @@ app.post("/takeover_drone", (req, res) => {
   const ip_id = req.body.ip_id;
   const ip_tag = parseInt(req.body.ip_tag);
 
-  db.query(`call takeover_drone(?,?)`, [ip_username, ip_id, ip_tag],
+  db.query(`call takeover_drone(?,?, ?)`, [ip_username, ip_id, ip_tag],
     (err, result) => {
       if (err) {
         console.log(err);
@@ -697,7 +721,7 @@ app.post("/fly_drone", (req, res) => {
   const ip_tag = parseInt(req.body.ip_tag);
   const ip_destination  = req.body.ip_destination;
 
-  db.query(`call fly_drone(?,?,?,?)`, [ip_id, ip_tag, ip_destination],
+  db.query(`call fly_drone(?,?,?)`, [ip_id, ip_tag, ip_destination],
     (err, result) => {
       if (err) {
         console.log(err);
@@ -786,7 +810,7 @@ app.post("/remove_drone", (req, res) => {
   const ip_id = req.body.ip_id;
   const ip_tag = parseInt(req.body.ip_tag);  
 
-  db.query(`call remove_drone(?)`, [ip_id, ip_tag],
+  db.query(`call remove_drone(?, ?)`, [ip_id, ip_tag],
     (err, result) => {
       if (err) {
         console.log(err);

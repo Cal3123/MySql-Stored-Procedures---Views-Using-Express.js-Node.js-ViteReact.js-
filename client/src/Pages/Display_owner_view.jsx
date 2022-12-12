@@ -20,8 +20,8 @@ function Display_owner_view() {
     return (
       <>
         <div className="App">
-          <text >  Display Owner View </text>
-          <h1>{notification}</h1>
+          <h1 >  Display Owner View </h1>
+          <h2>{notification}</h2>
           <div className="employees">
             <button onClick={getEmployees}>Show Owner View</button>
           </div>

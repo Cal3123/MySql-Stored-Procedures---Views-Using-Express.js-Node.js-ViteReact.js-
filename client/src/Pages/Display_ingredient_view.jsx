@@ -20,8 +20,8 @@ function Display_ingredient_view() {
     return (
       <>
         <div className="App">
-          <text >  Display Ingredient View </text>
-          <h1>{notification}</h1>
+          <h1 >  Display Ingredient View </h1>
+          <h2>{notification}</h2>
           <div className="ingredients">
             <button onClick={getIngredients}>Show Ingredients View</button>
           </div>
