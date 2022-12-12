@@ -80,22 +80,7 @@ function Add_restaurant() {
             <label>{colNames[3]}:</label>
             <Location name="location" onChange={(event) => {setLocation(event.target.value);}} />
             <button onClick={addRestaurant}>Add Restaurant</button>
-          </div>
-          <div className="restaurants">
             <button onClick={getRestaurants}>Show Restaurants</button>
-              
-  
-            {/*pilots.map((val, key) => {
-              return (
-                <div className="employee">
-                  <div>
-                    <h3>Username: {val.username}</h3>
-                    <h3>LicenseID: {val.licenseID}</h3>
-                    <h3>PilotExperiencee: {val.experience}</h3>
-                  </div>
-                </div>
-              );
-            })*/}
           </div>
       </div>
       <Table list={restaurants}/>
