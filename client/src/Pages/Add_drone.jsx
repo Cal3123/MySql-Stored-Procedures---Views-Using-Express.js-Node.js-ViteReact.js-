@@ -6,7 +6,7 @@ import { DeliveryService, UsernameSelect } from "../Components/Form";
 
 function Add_drone() {
     const [ip_id, setIpId] = useState("");
-    const [ip_tag, setIpTag] = useState(0);
+    const [ip_tag, setIpTag] = useState(-1);
     const [ip_fuel, setIpFuel] = useState(0);
     const [ip_capacity, setIpCapacity] = useState(0);
     const [ip_sales, setIpSales] = useState(0);
@@ -18,9 +18,19 @@ function Add_drone() {
 
     
     const addDrone = () => {
-  
-      if(ip_id.length > 0 && ip_tag !== 0 && ip_capacity !== 0 && ip_sales !== 0
-         && ip_flown_by.length > 0 && ip_fuel !== 0){
+      if (ip_id.length < 1) {
+        setNotification("Please Select a Valid Delivery Service");
+      } else if (ip_tag < 0) {
+        setNotification("Please Enter a Valid Drone Tag");
+      } else if (ip_capacity < 1) {
+        setNotification("Drones Must Be Able to Carry Loads");
+      } else if (ip_sales < 0) {
+        setNotification("Drones Cannot Have Negative Sales. Review Balance Sheets.")
+      }  else if (ip_fuel < 0) {
+        setNotification("Drones Cannot Have Negative Fuel");
+      } else if (ip_flown_by.length < 1) {
+        setNotification("Drone Must Have Initial Pilot");
+      } else {
           Axios.post("http://localhost:3001/add_drone", {
             ip_id : ip_id,
             ip_tag : ip_tag,
@@ -31,8 +41,6 @@ function Add_drone() {
           }).then((res) => {
               setNotification(res.data.message)
           });
-      } else {
-        setNotification("One of your field(s) is empty");
       }
   
     };
@@ -55,37 +63,37 @@ function Add_drone() {
         <div className="App">
           
           <div className="information">
-          <text >  Add Drone  Procedure</text>
-          <h1>{notification}</h1>
+          <h1 >  Add Drone  Procedure</h1>
+          <h2>{notification}</h2>
             <label>{colNames[0]}:</label>
-            <DeliveryService name="service" onChange={(event) => {setIpId(event.target.value);}} />
+            <DeliveryService name="service" onChange={(event) => {setIpId(event.target.value); setIpTag(-1);}} />
             <label>{colNames[1]}:</label>
             <input
               type="number"
               onChange={(event) => {
-                setIpTag(event.target.value);
-              }}
+                setIpTag(parseInt(event.target.value));
+              }} min="0"
             />
             <label>{colNames[2]}:</label>
             <input
               type="number"
               onChange={(event) => {
-                setIpFuel(event.target.value);
-              }}
+                setIpFuel(parseInt(event.target.value));
+              }} min="0"
             />
             <label>{colNames[3]}:</label>
             <input
               type="number"
               onChange={(event) => {
-                setIpCapacity(event.target.value);
-              }}
+                setIpCapacity(parseInt(event.target.value));
+              }} min="0"
             />
             <label>{colNames[4]}:</label>
             <input
               type="number"
               onChange={(event) => {
-                setIpSales(event.target.value);
-              }}
+                setIpSales(parseInt(event.target.value));
+              }} min="0"
             />
             <label>{colNames[5]}:</label>
             <UsernameSelect name="flown_by" onChange={(event) => {setIpFlownBy(event.target.value);}} />
