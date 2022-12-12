@@ -14,7 +14,7 @@ function Hire_employee() {
 
     
     const hireEmployee = () => {
-      if (ip_username.length < 1) {
+      if (ip_owner.length < 1) {
         setNotification("Please Choose a Valid User");
       } else if (ip_id.length < 1) {
         setNotification("Please Choose a Valid Delivery Service");
@@ -45,7 +45,7 @@ function Hire_employee() {
     return (
       <>
         <div className="App">
-          <h1>Add Employee Procedure </h1>
+          <h1>Hire Employee Procedure </h1>
           <h2>{notification}</h2>
           <div className="information">
             <label>{colNames[0]}:</label>

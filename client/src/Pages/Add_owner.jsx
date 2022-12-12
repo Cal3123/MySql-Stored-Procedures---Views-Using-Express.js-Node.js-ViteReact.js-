@@ -12,33 +12,43 @@ function Add_owner() {
     const [ip_birthdate, setIpBirthDate] = useState(null);
     const [owners, setOwners] = useState([]);
     const [notification, setNotification] = useState("");
-    const colNames = ["Username", "First Name", "Last Name", "Address", "Birth Date"];
+    const colNames = ["Owner", "First Name", "Last Name", "Address", "Birth Date"];
     
     const addOwner = () => {
-  
-      if(ip_username.length > 0 && ip_first_name.length && ip_last_name.length > 0 
-        && ip_birthdate != null && ip_address.length> 0 ){
-          Axios.post("http://localhost:3001/add_owner", {
-            ip_username : ip_username,
-            ip_first_name : ip_first_name,
-            ip_last_name : ip_last_name,
-            ip_address : ip_address,
-            ip_birthdate : ip_birthdate,
-          }).then((res) => {
-              setNotification(res.data.message)
-          });
+      if (ip_username.length < 1) {
+        setNotification("Please Select a Owner");
+      } else if (ip_first_name.length < 1) {
+        setNotification("Please Specify a First Name");
+      } else if (ip_last_name.length < 1) {
+        setNotification("Please Specify a Last Name");
+      } else if (ip_birthdate == null) {
+        setNotification("Please Enter a Valid Birth Date");
+      } else if (ip_address.length < 1) {
+        setNotification("Please Enter a Valid Address");
       } else {
-        setNotification("One of your field(s) is empty");
+        Axios.post("http://localhost:3001/add_owner", {
+          ip_username : ip_username,
+          ip_first_name : ip_first_name,
+          ip_last_name : ip_last_name,
+          ip_address : ip_address,
+          ip_birthdate : ip_birthdate
+        }).then((res) => {
+            setNotification(res.data.message);
+        });
       }
   
     };
   
     const getOwners = () => {
       Axios.get("http://localhost:3001/add_owner").then((response) => {
-        if(response.message === "Get Error") {
+        if(response.data.message === "Get Error") {
           setNotification("Get Error")
         } else {
-          setOwners(response.data);
+          if(response.data.message === "Get Error") {
+            setNotification("Get Error")
+          } else {
+            setOwners(response.data);
+          } 
         }
         
       });
@@ -49,11 +59,11 @@ function Add_owner() {
     return (
       <>
         <div className="App">
-          <text >  Add Owner Procedure </text>
-          <h1>{notification}</h1>
+          <h1 >  Add Owner Procedure </h1>
+          <h2>{notification}</h2>
           <div className="information">
             <label>{colNames[0]}:</label>
-            <UsernameSelect name="username" onChange={(event) => {setIpUsername(event.target.value);}} />
+            <input type="text" minLength="1" maxLength="40" onChange={(event) => {setIpUsername(event.target.value);}} />
             <label>{colNames[1]}:</label>
             <input
               type="text"
@@ -82,23 +92,10 @@ function Add_owner() {
                 setIpBirthDate(event.target.value);
               }}
             />
-            <button onClick={addOwner}>Add Drone</button>
+            <button onClick={addOwner}>Add Owner</button>
           </div>
           <div className="owners">
-            <button onClick={getOwners}>Show Drones</button>
-              
-  
-            {/*pilots.map((val, key) => {
-              return (
-                <div className="employee">
-                  <div>
-                    <h3>Username: {val.username}</h3>
-                    <h3>LicenseID: {val.licenseID}</h3>
-                    <h3>PilotExperiencee: {val.experience}</h3>
-                  </div>
-                </div>
-              );
-            })*/}
+            <button onClick={getOwners}>Show/Refresh Owners</button>
           </div>
       </div>
       <Table list={owners}/>

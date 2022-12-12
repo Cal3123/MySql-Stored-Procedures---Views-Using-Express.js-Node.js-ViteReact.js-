@@ -7,21 +7,32 @@ import { RestaurantSelect, UsernameSelect } from "../Components/Form";
 function Start_funding() {
   const [ip_owner, setOwner] = useState("");
   const [ip_long_name, setRestaurantName] = useState("");
+  const [restaurant, setRestaurant] = useState([]);
   const [notification, setNotification] = useState("");
 
   const startFunding = () => {
-
-    if(ip_owner.length > 0 && ip_long_name.length > 0){
-        Axios.post("http://localhost:3001/start_funding", {
-          ip_owner: ip_owner,
-          ip_long_name: ip_long_name
-        }).then((res) => {
-            setNotification(res.data.message)
-        });
+    if (ip_owner.length < 1) {
+      setNotification("Please Select a Valid Owner");
+    } else if (ip_long_name.length < 1) {
+      setNotification("Please Select a Valid Restaurant");
     } else {
-      setNotification("One of your field(s) is empty");
+      Axios.post("http://localhost:3001/start_funding", {
+        ip_owner: ip_owner,
+        ip_long_name: ip_long_name
+      }).then((res) => {
+          setNotification(res.data.message)
+      });
     }
+  };
 
+  const getRestaurants = () => {
+    Axios.get("http://localhost:3001/start_funding").then((response) => {
+      if(response.data.message === "Get Error") {
+        setNotification("Get Error")
+      } else {
+        setRestaurant(response.data);
+      }     
+    });
   };
 
   const colNames = ["Owner Username", "Restaurant Name"];
@@ -37,8 +48,10 @@ function Start_funding() {
           <label>{colNames[1]}:</label>
           <RestaurantSelect name="restaurant" onChange={(event) => {setRestaurantName(event.target.value);}} />
           <button onClick={startFunding}>Start Funding</button>
+          <button onClick={ getRestaurants}>Show Restaurants</button>
         </div>
     </div>
+    <Table list={restaurant}/>
     </>
   );  
 }

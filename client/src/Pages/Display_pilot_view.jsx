@@ -20,8 +20,8 @@ function Display_pilot_view() {
     return (
       <>
         <div className="App">
-          <text >  Display Location View </text>
-          <h1>{notification}</h1>
+          <h1 >  Display Pilot View </h1>
+          <h2>{notification}</h2>
           <div className="employees">
             <button onClick={getEmployees}>Show Location View</button>
           </div>

@@ -68,14 +68,14 @@ function Add_restaurant() {
               type="number"
               onChange={(event) => {
                 setRating(event.target.value);
-              }}
+              }} min="1" max="5"
             />
             <label>{colNames[2]}:</label>
             <input
               type="number"
               onChange={(event) => {
                 setSpent(event.target.value);
-              }}
+              }} min="0"
             />
             <label>{colNames[3]}:</label>
             <Location name="location" onChange={(event) => {setLocation(event.target.value);}} />
