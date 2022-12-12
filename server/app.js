@@ -297,7 +297,7 @@ app.get("/add_ingredient", (req, res) => {
 
 app.post("/add_drone", (req, res) => {
   const ip_id = req.body.ip_id;
-  const ip_tag = req.body.ip_tag;
+  const ip_tag = parseInt(req.body.ip_tag);
   const ip_fuel = parseInt(req.body.ip_fuel);
   const ip_capacity = parseInt(req.body.ip_capacity);
   const ip_sales = parseInt(req.body.ip_sales);
