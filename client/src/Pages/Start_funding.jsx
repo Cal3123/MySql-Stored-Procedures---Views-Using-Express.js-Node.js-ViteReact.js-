@@ -10,6 +10,7 @@ function Start_funding() {
   const [restaurant, setRestaurant] = useState([]);
   const [notification, setNotification] = useState("");
   const tableNames = ["long_name", "rating", "spent", "location", "funded_by"]
+  const colNames = ["Owner", "Restaurant"];
 
 
   const startFunding = () => {
@@ -36,8 +37,6 @@ function Start_funding() {
       }     
     });
   };
-
-  const colNames = ["Owner Username", "Restaurant Name"];
  
   return (
     <>
