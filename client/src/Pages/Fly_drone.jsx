@@ -62,7 +62,7 @@ function Fly_drone() {
             <Location name="location" onChange={(event) => {
                 setIpDestination(event.target.value);
               }} />
-            <button onClick={addEmployee}>Add Drone</button>
+            <button onClick={addEmployee}>Fly Drone</button>
           </div>
           <div className="drones">
             <button onClick={getDrones}>Show Drones</button>

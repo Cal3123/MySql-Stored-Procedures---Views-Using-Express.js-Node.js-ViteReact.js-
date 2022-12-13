@@ -1,6 +1,6 @@
 const express = require("express");
 const app = express();
-const mysql = require("mysql");
+const mysql = require("mysql2");
 const cors = require("cors");
 const dotenv = require("dotenv");
 dotenv.config();
@@ -12,7 +12,20 @@ const db = mysql.createConnection({
   user: process.env.DATABASE_USER,
   host: process.env.DATABASE_HOST,
   password: process.env.DATABASE_PASSWORD,
-  database: process.env.DATABASE_NAME
+  database: process.env.DATABASE_NAME,
+  port: process.env.DATABASE_PORT
+});
+
+if(db.state === 'disconnected'){
+   console.log("ERROR");
+}
+
+db.connect(function(err) {
+  if (err) {
+    return console.error('error: ' + err.message);
+  }
+
+  console.log('Connected to the MySQL server.');
 });
 
 /** START GET FOR INPUTS */
