@@ -9,11 +9,13 @@ function Remove_pilot_role() {
     const [ip_username, setUserName] = useState("");
     const [pilots, setPilots] = useState([]);
     const [notification, setNotification] = useState("");
-    const colNames = ["Username"];
+    const  colNames = ["username"];
+    const  TableNames = ["Employee", "License ID", "Pilot Experience"];
+
     
   
     const getPilot_roles = () => {
-      Axios.get("http://localhost:3001/add_pilot_role").then((response) => {
+      Axios.get("http://localhost:3001/remove_pilot_role").then((response) => {
         if(response.data.message === "Get Error") {
           setNotification("Get Error")
         } else {
@@ -52,22 +54,9 @@ function Remove_pilot_role() {
           </div>
           <div className="pilot_roles">
             <button onClick={getPilot_roles}>Show Pilot Roles</button>
-              
-  
-            {/*pilots.map((val, key) => {
-              return (
-                <div className="employee">
-                  <div>
-                    <h3>Username: {val.username}</h3>
-                    <h3>LicenseID: {val.licenseID}</h3>
-                    <h3>PilotExperiencee: {val.experience}</h3>
-                  </div>
-                </div>
-              );
-            })*/}
           </div>
       </div>
-      <Table list={pilots}/>
+      <Table list={pilots} colNames={TableNames}/>
       </>
     );  
   }

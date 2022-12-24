@@ -49,7 +49,7 @@ function Load_drone() {
   };
 
   const colNames = ["Delivery Service", "Drone Tag", "Item Barcode", "Additional Package Count", "Price"];
- 
+ const TableNames = ["Delivery Service ID", "Drone Tag", "Barcode", "Quantity", "Price"];
   return (
     <>
       <div className="App">
@@ -63,14 +63,14 @@ function Load_drone() {
           <label>{colNames[2]}:</label>
             <Ingredient name="ingredient" onChange={(event) => {setBarcode(event.target.value);}} />
           <label>{colNames[3]}:</label>
-          <input type="number" min="1" placeholder="Package Count" onChange={(event) => {setPackageCount(parseInt(event.target.value));}} />
+          <input type="number" min="1" step="1" placeholder="Package Count" onChange={(event) => {setPackageCount(parseInt(event.target.value));}} />
           <label>{colNames[4]}:</label>
-          <input type="number" min="0" placeholder="Price" onChange={(event) => {setPrice(parseInt(event.target.value));}} />
+          <input type="number" min="0" placeholder="Price" step="1" onChange={(event) => {setPrice(parseInt(event.target.value));}} />
           <button onClick={loadDrone}>Load Drone</button>
           <button onClick={getLoads}>View Loads</button>
         </div>
     </div>
-    <Table list={loads}/>
+    <Table list={loads} colNames={TableNames}/>
     </>
   );  
 }

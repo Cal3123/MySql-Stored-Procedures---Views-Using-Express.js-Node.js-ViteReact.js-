@@ -9,7 +9,7 @@ function Add_ingredient() {
     const [ip_weight, setIpWeight] = useState(0);
     const [notification, setNotification] = useState("");
     const [ingredients, setIngredients] = useState([]);
-    const colNames = ["Barcode", "Ingredient Name", "Weight"];
+    const TableNames = ["Barcode", "Ingredient Name", "Weight"];
 
 
 
@@ -42,34 +42,32 @@ function Add_ingredient() {
       });
     };
   
-
- 
     return (
       <>
         <div className="App">
           <h1 > Ingredients </h1>
           <h2>{notification}</h2>
           <div className="information">
-            <label>{colNames[0]}:</label>
+            <label>{TableNames[0]}:</label>
             <input
               type="text"
               onChange={(event) => {
                 setIpBarcode(event.target.value);
-              }}
+              }} minLength="0" maxLength="40"
             />
-            <label>{colNames[1]}:</label>
+            <label>{TableNames[1]}:</label>
             <input
               type="text"
               onChange={(event) => {
                 setIpIname(event.target.value);
-              }}
+              }} minLength="0" maxLength="100"
             />
-            <label>{colNames[2]}:</label>
+            <label>{TableNames[2]}:</label>
             <input
               type="number"
               onChange={(event) => {
                 setIpWeight(event.target.value);
-              }}
+              }} min="0" step="1"
             />
             <button onClick={addIngredient}>Add Ingredient</button>
           </div>
@@ -77,7 +75,7 @@ function Add_ingredient() {
             <button onClick={getIngredients}>Show Ingredients</button>
           </div>
       </div>
-      <Table list={ingredients}/>
+      <Table list={ingredients} colNames={TableNames}/>
       </>
     );  
   }

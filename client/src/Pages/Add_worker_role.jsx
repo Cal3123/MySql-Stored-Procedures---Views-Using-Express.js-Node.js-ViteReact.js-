@@ -19,7 +19,7 @@ function Add_worker_role() {
               setNotification(res.data.message)
           });
       } else {
-        setNotification("Please Select an Employee");
+        setNotification("Please Select a Worker");
       }
   
     };
@@ -36,10 +36,11 @@ function Add_worker_role() {
   
 
  
+    const TableNames = ["username"]
     return (
       <>
         <div className="App">
-          <h1 >Add  Worker Role </h1>
+          <h1 > Worker Roles </h1>
           <h2>{notification}</h2>
           <div className="information">
             <label>{colNames[0]}:</label>
@@ -50,22 +51,9 @@ function Add_worker_role() {
           </div>
           <div className="worker_roles">
             <button onClick={getWorker_roles}>Show Worker Roles</button>
-              
-  
-            {/*pilots.map((val, key) => {
-              return (
-                <div className="employee">
-                  <div>
-                    <h3>Username: {val.username}</h3>
-                    <h3>LicenseID: {val.licenseID}</h3>
-                    <h3>PilotExperiencee: {val.experience}</h3>
-                  </div>
-                </div>
-              );
-            })*/}
           </div>
       </div>
-      <Table list={worker_roles}/>
+      <Table list={worker_roles} colNames={TableNames}/>
       </>
     );  
   }

@@ -45,6 +45,7 @@ function Refuel_drone() {
     };
 
  
+    const TableNames = ["id", "tag", "fuel", "capacity", "sales", "flown_by", "swarm_id","swarm_tag", "hover"]
     return (
       <>
         <div className="App">
@@ -65,7 +66,7 @@ function Refuel_drone() {
               type="number"
               onChange={(event) => {
                 setIpMoreFuel(parseInt(event.target.value));
-              }} min="1"
+              }} min="1" step="1"
             />
             <button onClick={refuelDrone}>Refuel Drone</button>
           </div>
@@ -74,7 +75,7 @@ function Refuel_drone() {
             
           </div>
       </div>
-      <Table list={drones}/>
+      <Table list={drones} colNames = {TableNames}/>
       </>
     );  
   }

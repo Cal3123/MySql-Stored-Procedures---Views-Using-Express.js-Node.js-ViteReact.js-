@@ -41,6 +41,7 @@ function Fire_employee() {
   
 
  
+    const TableNames = ["Service Name", "Employee Name", "Employee Username", "Service ID"]
     return (
       <>
         <div className="App">
@@ -57,22 +58,10 @@ function Fire_employee() {
           </div>
           <div className="employees">
             <button onClick={getEmployees}>Show Employees</button>
-              
-  
-            {/*pilots.map((val, key) => {
-              return (
-                <div className="employee">
-                  <div>
-                    <h3>Username: {val.username}</h3>
-                    <h3>LicenseID: {val.licenseID}</h3>
-                    <h3>PilotExperiencee: {val.experience}</h3>
-                  </div>
-                </div>
-              );
-            })*/}
+            
           </div>
       </div>
-      <Table list={employees}/>
+      <Table list={employees} colNames={TableNames}/>
       </>
     );  
   }

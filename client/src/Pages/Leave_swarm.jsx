@@ -38,7 +38,7 @@ function Leave_swarm() {
 
 
   const colNames = ["Delivery Service ID", "Drone Tag"];
- 
+  const TableNames = ["id", "tag", "fuel", "capacity", "sales", "flown_by", "swarm_id","swarm_tag", "hover"];
   return (
     <>
       <div className="App">
@@ -53,7 +53,7 @@ function Leave_swarm() {
           <button onClick={getDrones}>Show/Refresh Drones</button>
         </div>
     </div>
-    <Table list={drones} />
+    <Table list={drones} colNames={TableNames} />
     </>
   );  
 }

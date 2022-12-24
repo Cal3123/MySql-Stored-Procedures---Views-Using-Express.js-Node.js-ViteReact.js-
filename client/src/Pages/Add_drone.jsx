@@ -47,7 +47,6 @@ function Add_drone() {
   
     const getDrones = () => {
       Axios.get("http://localhost:3001/add_drone").then((response) => {
-        console.log(response)
         if(response.data.message === "Get Error") {
           setNotification("Get Error")
         } else {
@@ -57,7 +56,7 @@ function Add_drone() {
     };
   
 
- 
+    const TableNames = ["id", "tag", "fuel", "capacity", "sales", "flown_by", "swarm_id", "swarm_tag", "hover"]
     return (
       <>
         <div className="App">
@@ -98,10 +97,12 @@ function Add_drone() {
             <label>{colNames[5]}:</label>
             <UsernameSelect name="flown_by" onChange={(event) => {setIpFlownBy(event.target.value);}} />
             <button onClick={addDrone}>Add Drone</button>
+          </div>
+          <div >
             <button onClick={getDrones}>Show Drones</button>
           </div>
       </div>
-      <Table list={drones}/>
+      <Table list={drones} colNames={TableNames}/>
       </>
     );  
   }

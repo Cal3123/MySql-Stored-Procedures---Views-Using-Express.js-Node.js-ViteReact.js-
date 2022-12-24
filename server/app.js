@@ -1,6 +1,6 @@
 const express = require("express");
 const app = express();
-const mysql = require("mysql");
+const mysql = require("mysql2");
 const cors = require("cors");
 const dotenv = require("dotenv");
 dotenv.config();
@@ -12,10 +12,23 @@ const db = mysql.createConnection({
   user: process.env.DATABASE_USER,
   host: process.env.DATABASE_HOST,
   password: process.env.DATABASE_PASSWORD,
-  database: process.env.DATABASE_NAME
+  database: process.env.DATABASE_NAME,
+  port: process.env.DATABASE_PORT
 });
 
-/** START GET FOR INPUTS*/  
+if(db.state === 'disconnected'){
+   console.log("ERROR");
+}
+
+db.connect(function(err) {
+  if (err) {
+    return console.error('error: ' + err.message);
+  }
+
+  console.log('Connected to the MySQL server.');
+});
+
+/** START GET FOR INPUTS */
 app.get("/getUsernames", (req, res) => {
   db.query("SELECT username, concat(first_name, ' ', last_name, ' (', username, ')') as name FROM users", (err, result) => {
     if (err) {
@@ -101,14 +114,12 @@ app.get("/getIngredients", (req, res) => {
 app.get("/getLocations", (req, res) => {
   db.query("SELECT * FROM locations", (err, result) => {
     if (err) {
-      console.log(err)
       res.header('Access-Control-Allow-Origin', '*');
-      res.json({ message: "Get getLocations Error" });
-    } else {    
+      res.json({ message: "Get Error" });
+    }  
 
-      res.header('Access-Control-Allow-Origin', '*');
-      res.json(result);
-    }
+    res.header('Access-Control-Allow-Origin', '*');
+    res.json(result);
   });
 });
 
@@ -158,7 +169,7 @@ app.post("/add_owner", (req, res) => {
 });
 
 app.get("/add_owner", (req, res) => {
-  db.query("SELECT * FROM restaurant_owners", (err, result) => {
+  db.query("SELECT * FROM display_owner_view", (err, result) => {
     if (err) {
       console.log(err);
       res.json({ message: "Get Error" })
@@ -399,10 +410,11 @@ app.post("/add_location", (req, res) => {
     (err, result) => {
       if (err) {
         console.log(err);
-        res.json({ message: "Error detected" })
+        res.json({ message: "Error detected" });
         //res.send("Error detected")
       } else {
-        res.json({message: "Request Sent to Server" })
+        res.json({message: "Request Sent to Server" });
+
       }
     }
   );
@@ -525,7 +537,7 @@ app.post("/fire_employee", (req, res) => {
 });
 
 app.get("/fire_employee", (req, res) => {
-  db.query("SELECT * FROM employees", (err, result) => {
+  db.query("SELECT delivery_services.long_name, concat(users.first_name, ' ', users.last_name) as name, users.username, delivery_services.id FROM work_for, users, delivery_services WHERE work_for.username = users.username and delivery_services.id = work_for.id", (err, result) => {
     if (err) {
       console.log(err);
       res.json({ message: "Get Error" })
@@ -554,7 +566,7 @@ app.post("/manage_service", (req, res) => {
 });
 
 app.get("/manage_service", (req, res) => {
-  db.query("SELECT id, long_name, manager FROM delivery_services", (err, result) => {
+  db.query("SELECT * FROM delivery_services", (err, result) => {
     if (err) {
       console.log(err);
       res.json({ message: "Get Error" })
@@ -570,7 +582,7 @@ app.post("/takeover_drone", (req, res) => {
   const ip_id = req.body.ip_id;
   const ip_tag = parseInt(req.body.ip_tag);
 
-  db.query(`call takeover_drone(?,?, ?)`, [ip_username, ip_id, ip_tag],
+  db.query(`call takeover_drone(?,?,?)`, [ip_username, ip_id, ip_tag],
     (err, result) => {
       if (err) {
         console.log(err);
@@ -810,7 +822,7 @@ app.post("/remove_drone", (req, res) => {
   const ip_id = req.body.ip_id;
   const ip_tag = parseInt(req.body.ip_tag);  
 
-  db.query(`call remove_drone(?, ?)`, [ip_id, ip_tag],
+  db.query(`call remove_drone(?,?)`, [ip_id, ip_tag],
     (err, result) => {
       if (err) {
         console.log(err);
@@ -884,9 +896,9 @@ app.get("/display_employee_view", (req, res) => {
       console.log(err);
       res.json({ message: "Get Error" })
       //res.send("Error detected")
-    }  
-    console.log(result);
-    res.json(result);
+    }  else {
+      res.json(result);
+    }
   });
 });
 

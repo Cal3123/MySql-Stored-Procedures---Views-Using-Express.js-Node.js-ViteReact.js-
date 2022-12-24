@@ -42,6 +42,7 @@ function Join_swarm() {
   
 
  
+    const TableNames = ["id", "tag", "fuel", "capacity", "sales", "flown_by", "swarm_id","swarm_tag", "hover"]
     return (
       <>
         <div className="App">
@@ -88,7 +89,7 @@ function Join_swarm() {
             })*/}
           </div>
       </div>
-      <Table list={drones}/>
+      <Table list={drones} colNames={TableNames}/> 
       </>
     );  
   }

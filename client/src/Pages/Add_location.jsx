@@ -15,18 +15,23 @@ function Add_location() {
 
     
     const addLocation = () => {
-  
-      if(ip_label.length > 0 && ip_xcoord !== null && ip_ycoord !== null && ip_space !== 0){
-          Axios.post("http://localhost:3001/add_location", {
-            ip_label : ip_label,
-            ip_xcoord : ip_xcoord,
-            ip_ycoord : ip_ycoord,
-            ip_space : ip_space,
-          }).then((res) => {
-              setNotification(res.data.message)
-          });
+      if (ip_label.length < 1) {
+        setNotification("Please Enter a Location Label");
+      } else if (ip_xcoord === null) {
+        setNotification("Please Enter an X Coordinate");
+      } else if (ip_ycoord === null) {
+        setNotification("Please Enter a Y Coord");
+      } else if (ip_space < 1) {
+        setNotification("Locations Must Have Drone Space");
       } else {
-        setNotification("One of your field(s) is empty");
+        Axios.post("http://localhost:3001/add_location", {
+          ip_label : ip_label,
+          ip_x_coord : ip_xcoord,
+          ip_y_coord : ip_ycoord,
+          ip_space : ip_space,
+        }).then((res) => {
+            setNotification(res.data.message)
+        });
       }
   
     };
@@ -41,62 +46,49 @@ function Add_location() {
         });
     };
 
- 
+    const TableNames = ["label", "x_coord", "y_coord", "space"]
     return (
       <>
         <div className="App">
           
           <div className="information">
-          <text >  Add Location Procedure</text>
+          <h2 >  Add Location Procedure</h2>
           <h1>{notification}</h1>
             <label>{colNames[0]}:</label>
             <input
               type="text"
               onChange={(event) => {
                 setIpLabel(event.target.value);
-              }}
+              }} minLength="1" maxLength="40"
             />
             <label>{colNames[1]}:</label>
             <input
               type="number"
               onChange={(event) => {
-                setIpXCoord(event.target.value);
-              }}
+                setIpXCoord(parseInt(event.target.value));
+              }} step="1"
             />
             <label>{colNames[2]}:</label>
             <input
               type="number"
               onChange={(event) => {
-                setIpYCoord(event.target.value);
-              }}
+                setIpYCoord(parseInt(event.target.value));
+              }} step="1"
             />
             <label>{colNames[3]}:</label>
             <input
               type="number"
               onChange={(event) => {
-                setIpSpace(event.target.value);
-              }}
+                setIpSpace(parseInt(event.target.value));
+              }} step="1" min="1"
             />
             <button onClick={addLocation}>Add Location</button>
           </div>
           <div className="locations">
             <button onClick={getLocations}>Show Locations</button>
-              
-  
-            {/*pilots.map((val, key) => {
-              return (
-                <div className="employee">
-                  <div>
-                    <h3>Username: {val.username}</h3>
-                    <h3>LicenseID: {val.licenseID}</h3>
-                    <h3>PilotExperiencee: {val.experience}</h3>
-                  </div>
-                </div>
-              );
-            })*/}
           </div>
       </div>
-      <Table list={locations}/>
+      <Table list={locations} colNames={TableNames}/>
       </>
     );  
   }

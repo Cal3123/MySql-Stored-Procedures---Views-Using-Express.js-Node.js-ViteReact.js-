@@ -44,6 +44,7 @@ function Add_service() {
   
 
  
+    const TableNames = ["id", "long_name", "home_base", "manager"]
     return (
       <>
         <div className="App">
@@ -55,14 +56,14 @@ function Add_service() {
               type="text"
               onChange={(event) => {
                 setIpId(event.target.value);
-              }}
+              }} maxLength="40" minLength="1"
             />
             <label>{colNames[1]}:</label>
             <input
               type="text"
               onChange={(event) => {
                 setIpLongname(event.target.value);
-              }}
+              }} minLength="1" maxLength="100"
             />
             <label>{colNames[2]}:</label>
             <input
@@ -97,7 +98,7 @@ function Add_service() {
             })*/}
           </div>
       </div>
-      <Table list={services}/>
+      <Table list={services} colNames={TableNames}/>
       </>
     );  
   }

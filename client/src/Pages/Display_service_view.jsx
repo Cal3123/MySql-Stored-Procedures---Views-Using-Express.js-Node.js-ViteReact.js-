@@ -17,6 +17,7 @@ function Display_service_view() {
       });
     };
  
+    const TableNames = ["Service ID", "Name", "Home Base", "Manager", "Revenue", "Ingredients Carried", "Cost Carried", "Weight Carried"];
     return (
       <>
         <div className="App">
@@ -26,7 +27,7 @@ function Display_service_view() {
             <button onClick={getEmployees}>Show Service View</button>
           </div>
       </div>
-      <Table list={serviceView}/>
+      <Table list={serviceView} colNames={TableNames} />
       </>
     );  
   }

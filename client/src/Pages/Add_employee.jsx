@@ -68,7 +68,7 @@ function Add_employee() {
     };
   
 
- 
+    const TableNames = ["username", "taxID", "hired", "experience", "salary"]
     return (
       <>
         <div className="App">
@@ -77,27 +77,27 @@ function Add_employee() {
           <h1 >  Add Employee Procedure </h1>
           <h2>{notification}</h2>
             <label>{colNames[0]}:</label>
-            <input type="text" onChange={(event) => {setIpUsername(event.target.value);}} />
+            <input type="text" onChange={(event) => {setIpUsername(event.target.value);}} minLength="1" maxLength="40" />
             <label>{colNames[1]}:</label>
             <input
               type="text"
               onChange={(event) => {
                 setIpFirstName(event.target.value);
-              }}
+              }} minLength = "1" maxLength = "100"
             />
             <label>{colNames[2]}:</label>
             <input
               type="text"
               onChange={(event) => {
                 setIpLastName(event.target.value);
-              }}
+              }} minLength = "1" maxLength = "100"
             />
             <label>{colNames[3]}:</label>
             <input
               type="text"
               onChange={(event) => {
                 setIpAddress(event.target.value);
-              }}
+              }} minLength = "1" maxLength = "500"
             />
             <label>{colNames[4]}:</label>
             <input
@@ -111,7 +111,7 @@ function Add_employee() {
               type="text"
               onChange={(event) => {
                 setIpTaxId(event.target.value);
-              }}
+              }} minLength = "1" maxLength = "40"
             />
             <label>{colNames[6]}:</label>
             <input
@@ -125,14 +125,14 @@ function Add_employee() {
               type="number"
               onChange={(event) => {
                 setEmployeeExperience(parseInt(event.target.value));
-              }} defaultValue="0"
+              }} defaultValue="0" min="0" step="1"
             />
             <label>{colNames[8]}:</label>
             <input
               type="number"
               onChange={(event) => {
                 setIpSalary(parseInt(event.target.value));
-              }} placeholder="Salary"
+              }} placeholder="Salary" min="0" step="1"
             />
             <button onClick={addEmployee}>Add Employee</button>
           </div>
@@ -140,7 +140,7 @@ function Add_employee() {
             <button onClick={getEmployees}>Show/Refresh Employees</button>
           </div>
       </div>
-      <Table list={employees}/>
+      <Table list={employees} colNames={TableNames}/>
       </>
     );  
   }

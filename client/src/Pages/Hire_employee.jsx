@@ -14,7 +14,7 @@ function Hire_employee() {
 
     
     const hireEmployee = () => {
-      if (ip_username.length < 1) {
+      if (ip_owner.length < 1) {
         setNotification("Please Choose a Valid User");
       } else if (ip_id.length < 1) {
         setNotification("Please Choose a Valid Delivery Service");
@@ -41,7 +41,8 @@ function Hire_employee() {
     };
   
 
- 
+    const TableNames =["username", "id", "name", "long_name"]
+
     return (
       <>
         <div className="App">
@@ -58,7 +59,7 @@ function Hire_employee() {
             <button onClick={getEmployees}>Show Employees</button>
           </div>
       </div>
-      <Table list={employees} />
+      <Table list={employees} colNames={TableNames}/>
       </>
     );  
   }

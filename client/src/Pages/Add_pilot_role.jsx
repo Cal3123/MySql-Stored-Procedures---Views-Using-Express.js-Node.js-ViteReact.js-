@@ -55,11 +55,11 @@ function Add_pilot_role() {
             type="text"
             onChange={(event) => {
               setLicenseID(event.target.value);
-            }}
+            }} minLength="1" maxLength="40"
           />
           <label>{colNames[2]}:</label>
           <input
-            type="number" min="0"
+            type="number" min="0" step="1"
             onChange={(event) => {
               setPilotExperience(parseInt(event.target.value));
             }}

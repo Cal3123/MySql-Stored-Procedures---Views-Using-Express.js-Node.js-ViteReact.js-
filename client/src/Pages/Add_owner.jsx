@@ -55,7 +55,7 @@ function Add_owner() {
     };
   
 
- 
+    const TableNames = ["username", "first_name", "last_name", "address", "num_restaurants", "num_places", "highs", "lows", "debt"]
     return (
       <>
         <div className="App">
@@ -63,27 +63,27 @@ function Add_owner() {
           <h2>{notification}</h2>
           <div className="information">
             <label>{colNames[0]}:</label>
-            <UsernameSelect name="username" onChange={(event) => {setIpUsername(event.target.value);}} />
+            <input type="text" minLength="1" maxLength="40" onChange={(event) => {setIpUsername(event.target.value);}} />
             <label>{colNames[1]}:</label>
             <input
               type="text"
               onChange={(event) => {
                 setIpTag(event.target.value);
-              }}
+              }} minLength="1" maxLength="100"
             />
             <label>{colNames[2]}:</label>
             <input
               type="text"
               onChange={(event) => {
                 setIpFuel(event.target.value);
-              }}
+              }} minLength="1" maxLength="100"
             />
             <label>{colNames[3]}:</label>
             <input
               type="text"
               onChange={(event) => {
                 setIpCapacity(event.target.value);
-              }}
+              }} minLength="1" maxLength="500"
             />
             <label>{colNames[4]}:</label>
             <input
@@ -92,13 +92,13 @@ function Add_owner() {
                 setIpBirthDate(event.target.value);
               }}
             />
-            <button onClick={addOwner}>Add Drone</button>
+            <button onClick={addOwner}>Add Owner</button>
           </div>
           <div className="owners">
-            <button onClick={getOwners}>Show Drones</button>
+            <button onClick={getOwners}>Show/Refresh Owners</button>
           </div>
       </div>
-      <Table list={owners}/>
+      <Table list={owners} colNames={TableNames}/>
       </>
     );  
   }
